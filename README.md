@@ -5,7 +5,7 @@ Contextum je webový nástroj navržený pro efektivní organizaci času a infor
 ## Návrh wireframe
 ![Mobilní wireframe](docs/wireframeMobile.jpg)
 ![Desktop wireframe](docs/wireframeDesktop.jpg)
-## User floe diagram
+## User flow diagram
 ![User flow diagram](docs/flowDiagram.jpg)
 
 ## Instalace
