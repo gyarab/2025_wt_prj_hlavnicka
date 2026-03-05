@@ -24,10 +24,56 @@ Architektura <u>aplikace</u> se dělí na tři uživatelské úrovně:
 Díky promyšlenému navigačnímu toku poskytuje Contextum vysoce flexibilní a propojené <u>prostředí</u> pro každodenní osobní i profesní <u>produktivitu</u>.
 
 ## Instalace
+> [!NOTE]
+> Tato sekce byla vypůjčena z jiného wt_prj, kterému na ni spadají veškerá práva.
+## 2. Aktivace prostředí
 
-windows:
+### Linux (Popř. Git Bash / WSL /  macOS)
+
+```bash
+source .venv/bin/activate
 ```
-py -3 -m venv venv
-source venv/Scripts/activate
+
+### Windows – PowerShell
+
+```bash
+.venv\Scripts\Activate.ps1
+```
+
+### Windows – Příkazový řádek (cmd)
+
+```bash
+.venv\Scripts\activate.bat
+```
+
+Pokud nefunguje:
+
+```bash
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
+---
+
+## 3. Instalace závislostí
+
+Aktualizace pip:
+
+```bash
+python -m pip install --upgrade pip setuptools wheel
+```
+
+Instalace projektu:
+
+```bash
 pip install -r requirements.txt
+```
+
+---
+
+## 4. Spuštění aplikace
+
+### Django
+
+```bash
+python3 manage.py runserver
 ```
