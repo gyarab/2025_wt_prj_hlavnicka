@@ -19,7 +19,7 @@ Architektura <u>aplikace</u> se dělí na tři uživatelské úrovně:
 
 *  Registrovaný <u>uživatel</u>: Do systému vstupuje přes zabezpečenou <u>autentizaci</u> (s podporou <u>protokolu</u> Google OAuth). Po úspěšném přihlášení je přesměrován na svůj personalizovaný <u>dashboard</u> (hlavní stránku aplikace). Zde probíhají jeho klíčové <u>aktivity</u>: iniciuje přidávání nových prvků, spravuje <u>kalendář</u>, analyzuje svou výkonnost nebo prochází <u>podrobnosti</u> jednotlivých seznamů a záznamů. Dále zde provádí změnu hesla, definuje osobní <u>nastavení</u> a spravuje <u>integrace</u> na externí <u>zdroje</u> (např. cloudové <u>dokumenty</u>).
 
-  *  u>Administrátor</u>: Zajišťuje globální chod platformy. Kromě všech práv běžného klienta má přístup k pokročilé konfiguraci, moderaci obsahu a celkové <u>údržbě</u> uživatelských účtů.
+  *  <u>Administrátor</u>: Zajišťuje globální chod platformy. Kromě všech práv běžného klienta má přístup k pokročilé konfiguraci, moderaci obsahu a celkové <u>údržbě</u> uživatelských účtů.
 
 Díky promyšlenému navigačnímu toku poskytuje Contextum vysoce flexibilní a propojené <u>prostředí</u> pro každodenní osobní i profesní <u>produktivitu</u>.
 
