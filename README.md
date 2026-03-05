@@ -8,6 +8,20 @@ Contextum je webový nástroj navržený pro efektivní organizaci času a infor
 ## User flow diagram
 ![User flow diagram](docs/flowDiagram.jpg)
 
+## Odborný článek
+Contextum představuje inovativní webový <u>nástroj</u> určený pro efektivní <u>organizaci času</u> a systematickou <u>správu</u> informací. Tento <u>systém</u> úspěšně stírá tradiční hranice mezi běžným <u>úkolovníkem</u>, osobním <u>deníkem</u> a znalostním <u>archivátorem</u>. Jeho primárním cílem je poskytnout unifikovaný <u>prostor</u> pro centralizovaný <u>management</u> soukromých i veřejných <u>projektů</u>.
+
+Základním stavebním kamenem aplikační logiky jsou <u>úkoly</u>, které lze hierarchicky dekomponovat na detailní <u>podúkoly</u>. Tyto <u>entity</u> je možné sémanticky propojovat s tematickými články nebo retrospektivními <u>záznamy</u> o denních událostech. Klíčovou komponentou je inteligentní <u>plánovač</u>, který využívá algoritmy pro automatizované přiřazování práce na základě definovaných časových oken a aktuálních kapacit. Pro vizualizaci uživatelské efektivity slouží analytický modul generující přehledné <u>statistiky</u>.
+
+Architektura <u>aplikace</u> je navržena s ohledem na řízení přístupu na základě rolí (RBAC) a definuje tři základní úrovně:
+
+    Anonymní <u>návštěvník</u>: Pohybuje se převážně na veřejných informačních stránkách. Má <u>oprávnění</u> ke čtení publikovaných výstupů a selektivně sdílených článků, které byly uvolněny prostřednictvím modulu pro publikaci.
+
+    Registrovaný <u>uživatel</u>: Do systému vstupuje přes zabezpečenou <u>autentizaci</u> (s podporou <u>protokolu</u> Google OAuth). Po úspěšném přihlášení je přesměrován na svůj personalizovaný <u>dashboard</u> (hlavní stránku aplikace). Zde probíhají jeho klíčové <u>aktivity</u>: iniciuje přidávání nových prvků, spravuje <u>kalendář</u>, analyzuje svou výkonnost nebo <u>absence</u> a prochází <u>podrobnosti</u> jednotlivých seznamů a záznamů. Dále zde provádí změnu hesla, definuje osobní <u>nastavení</u> a spravuje <u>integrace</u> na externí <u>zdroje</u> (např. cloudové <u>dokumenty</u>).
+
+    <u>Administrátor</u>: Zajišťuje globální chod platformy. Kromě všech práv běžného klienta má přístup k pokročilé konfiguraci, moderaci obsahu a celkové <u>údržbě</u> uživatelských účtů.
+
+Díky promyšlenému navigačnímu toku poskytuje Contextum vysoce flexibilní a propojené <u>prostředí</u> pro každodenní osobní i profesní <u>produktivitu</u>.
 ## Instalace
 
 windows:
