@@ -9,19 +9,19 @@ Contextum je webový nástroj navržený pro efektivní organizaci času a infor
 ![User flow diagram](docs/flowDiagram.jpg)
 
 ## Odborný článek
-Contextum bude webový <u>nástroj</u> určený pro efektivní <u>organizaci času</u> a systematickou <u>správu</u> informací. Tento <u>systém</u> úspěšně stírá tradiční hranice mezi běžným <u>úkolovníkem</u>, osobním <u>deníkem</u> a znalostním <u>archivátorem</u>. Jeho primárním cílem je poskytnout sjednocený <u>prostor</u> pro centralizovaný <u>management</u> soukromých i veřejných <u>projektů</u> a osobních věcí.
+Contextum bude webový <ins>nástroj</ins> určený pro efektivní <ins>organizaci času</ins> a systematickou <ins>správu</ins> informací. Tento <ins>systém</ins> úspěšně stírá tradiční hranice mezi běžným <ins>úkolovníkem</ins>, osobním <ins>deníkem</ins> a znalostním <ins>archivátorem</ins>. Jeho primárním cílem je poskytnout sjednocený <ins>prostor</ins> pro centralizovaný <ins>management</ins> soukromých i veřejných <ins>projektů</ins> a osobních věcí.
 
-Základním stavebním kamenem aplikační logiky jsou <u>prvky (úkoly)</u>, které lze hierarchicky dekomponovat na detailní <u>podprvky (podúkoly)</u>. Tyto <u>entity</u> je možné sémanticky propojovat s tematickými články nebo seřazenými <u>záznamy</u> o denních událostech. Klíčovou komponentou je inteligentní <u>plánovač</u>, který využívá algoritmy pro automatizované přiřazování práce na základě definovaných časových oken a aktuálních kapacit. Pro vizualizaci uživatelské efektivity slouží analytický modul generující přehledné <u>statistiky</u>. (poznámka: Plánovač bude vytvořen v postupnější fázi projektu)
+Základním stavebním kamenem aplikační logiky jsou <ins>prvky (úkoly)</ins>, které lze hierarchicky dekomponovat na detailní <ins>podprvky (podúkoly)</ins>. Tyto <ins>entity</ins> je možné sémanticky propojovat s tematickými články nebo seřazenými <ins>záznamy</ins> o denních událostech. Klíčovou komponentou je inteligentní <ins>plánovač</ins>, který využívá algoritmy pro automatizované přiřazování práce na základě definovaných časových oken a aktuálních kapacit. Pro vizualizaci uživatelské efektivity slouží analytický modul generující přehledné <ins>statistiky</ins>. (poznámka: Plánovač bude vytvořen v postupnější fázi projektu)
 
-Architektura <u>aplikace</u> se dělí na tři uživatelské úrovně:
+Architektura <ins>aplikace</ins> se dělí na tři uživatelské úrovně:
 
-*  Anonymní <u>návštěvník</u>: Pohybuje se převážně na veřejných informačních stránkách. Má <u>oprávnění</u> ke čtení veřejné nápovědy a prvků zveřejněných uživatelem pro všechny.
+*  Anonymní <ins>návštěvník</ins>: Pohybuje se převážně na veřejných informačních stránkách. Má <ins>oprávnění</ins> ke čtení veřejné nápovědy a prvků zveřejněných uživatelem pro všechny.
 
-*  Registrovaný <u>uživatel</u>: Do systému vstupuje přes zabezpečenou <u>autentizaci</u> (s podporou <u>protokolu</u> Google OAuth). Po úspěšném přihlášení je přesměrován na svůj personalizovaný <u>dashboard</u> (hlavní stránku aplikace). Zde probíhají jeho klíčové <u>aktivity</u>: iniciuje přidávání nových prvků, spravuje <u>kalendář</u>, analyzuje svou výkonnost nebo prochází <u>podrobnosti</u> jednotlivých seznamů a záznamů. Dále zde provádí změnu hesla, definuje osobní <u>nastavení</u> a spravuje <u>integrace</u> na externí <u>zdroje</u> (např. cloudové <u>dokumenty</u>).
+*  Registrovaný <ins>uživatel</ins>: Do systému vstupuje přes zabezpečenou <ins>autentizaci</ins> (s podporou <ins>protokolu</ins> Google OAuth). Po úspěšném přihlášení je přesměrován na svůj personalizovaný <ins>dashboard</ins> (hlavní stránku aplikace). Zde probíhají jeho klíčové <ins>aktivity</ins>: iniciuje přidávání nových prvků, spravuje <ins>kalendář</ins>, analyzuje svou výkonnost nebo prochází <ins>podrobnosti</ins> jednotlivých seznamů a záznamů. Dále zde provádí změnu hesla, definuje osobní <ins>nastavení</ins> a spravuje <ins>integrace</ins> na externí <ins>zdroje</ins> (např. cloudové <ins>dokumenty</ins>).
 
-  *  <u>Administrátor</u>: Zajišťuje globální chod platformy. Kromě všech práv běžného klienta má přístup k pokročilé konfiguraci, moderaci obsahu a celkové <u>údržbě</u> uživatelských účtů.
+  *  <ins>Administrátor</ins>: Zajišťuje globální chod platformy. Kromě všech práv běžného klienta má přístup k pokročilé konfiguraci, moderaci obsahu a celkové <ins>údržbě</ins> uživatelských účtů.
 
-Díky promyšlenému navigačnímu toku poskytuje Contextum vysoce flexibilní a propojené <u>prostředí</u> pro každodenní osobní i profesní <u>produktivitu</u>.
+Díky promyšlenému navigačnímu toku poskytuje Contextum vysoce flexibilní a propojené <ins>prostředí</ins> pro každodenní osobní i profesní <ins>produktivitu</ins>.
 
 ## Instalace
 > [!NOTE]
