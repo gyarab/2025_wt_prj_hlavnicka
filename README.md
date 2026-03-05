@@ -25,7 +25,7 @@ Díky promyšlenému navigačnímu toku poskytuje Contextum vysoce flexibilní a
 
 ## Instalace
 > [!NOTE]
-> Tato sekce byla vypůjčena z jiného (wt_prj)[https://github.com/gyarab/2025_wt_prj_tlamka], kterému na ni spadají veškerá práva.
+> Tato sekce byla vypůjčena z jiného [wt_prj](https://github.com/gyarab/2025_wt_prj_tlamka), kterému na ni spadají veškerá práva.
 ## 2. Aktivace prostředí
 
 ### Linux (Popř. Git Bash / WSL /  macOS)
