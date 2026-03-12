@@ -7,7 +7,8 @@ Contextum je webový nástroj navržený pro efektivní organizaci času a infor
 ![Desktop wireframe](docs/wireframeDesktop.jpg)
 ## User flow diagram
 ![User flow diagram](docs/flowDiagram.jpg)
-
+## Schéma Databáze
+![Schéma DB](docs/schemaDB.jpg)
 ## Odborný článek
 Contextum bude webový <ins>nástroj</ins> určený pro efektivní <ins>organizaci času</ins> a systematickou <ins>správu</ins> informací. Tento <ins>systém</ins> úspěšně stírá tradiční hranice mezi běžným <ins>úkolovníkem</ins>, osobním <ins>deníkem</ins> a znalostním <ins>archivátorem</ins>. Jeho primárním cílem je poskytnout sjednocený <ins>prostor</ins> pro centralizovaný <ins>management</ins> soukromých i veřejných <ins>projektů</ins> a osobních věcí.
 
