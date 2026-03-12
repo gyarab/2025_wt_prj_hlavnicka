@@ -27,6 +27,10 @@ Díky promyšlenému navigačnímu toku poskytuje Contextum vysoce flexibilní a
 ## Instalace
 > [!NOTE]
 > Tato sekce byla vypůjčena z jiného [wt_prj](https://github.com/gyarab/2025_wt_prj_tlamka), kterému na ni spadají veškerá práva.
+## 1. Vytvoření prostředí
+```bash
+python3 -m venv .venv
+```
 ## 2. Aktivace prostředí
 
 ### Linux (Popř. Git Bash / WSL /  macOS)
