@@ -19,7 +19,9 @@ from django.contrib import admin
 from django.urls import path
 
 from django.conf.urls import handler404
-from app.views import custom_404, test_view, home_view, about_view
+from app.views import custom_404, test_view, home_view, about_view, detail_prvku, detail_stitku
+from django.contrib.auth import views as auth_views 
+
 
 handler404 = custom_404
 
@@ -29,4 +31,9 @@ urlpatterns = [
     path("test-404/", test_view),
     path("about/", about_view),
     path("home/", home_view),
+    path('prihlaseni/', auth_views.LoginView.as_view(), name='login'),
+    path('odhlaseni/', auth_views.LogoutView.as_view(), name='logout'),
+    path('prvek/<int:id>/', detail_prvku, name='detail_prvku'),
+    path('', home_view, name='home'),
+    path("stitek/<int:id>/", detail_stitku, name="detail_stitku")
 ]

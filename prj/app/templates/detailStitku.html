@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Detail Štítku</h1>
+    <p><span style="background-color: {{ stitek.barva }};display:inline-block;padding:5px;border-radius:20px">{{ stitek.nazev }}</span></p>
+    <p>Vlastník: {{ stitek.vlastnik.username }}</p>
+{% endblock %}

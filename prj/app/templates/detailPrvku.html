@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Detail Prvku</h1>
+    <p>Název: {{ prvek.nazev }}</p>
+    <p>Obsah: {{ prvek.obsah }}</p>
+    <p>Vlastník: {{ prvek.vlastnik.username }}</p>
+    <p>Štítky: {% for stitek in prvek.stitky.all %}<a href="{% url 'detail_stitku' stitek.id %}" style="color:black;text-decoration:none;background-color: {{ stitek.barva }};display:inline-block;padding:5px;border-radius:20px">{{ stitek.nazev }}</a> {% endfor %}</p>
+{% endblock %}
