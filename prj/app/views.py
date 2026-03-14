@@ -21,16 +21,19 @@ def about_view(request):
 
 def detail_prvku(request, id):
     if not request.user.is_authenticated:
-        return redirect('/prihlaseni') 
+        return redirect('/prihlasit') 
     try:
         prvek = Prvek.objects.get(id=id)
     except Prvek.DoesNotExist:
+        raise Http404("Prvek nenalezen")
+
+    if not prvek.vlastnik == request.user and not prvek.vlastnik == None:
         raise Http404("Prvek nenalezen")
     return render(request, "detailPrvku.html", {"prvek": prvek})
 
 def detail_stitku(request,id):
     if not request.user.is_authenticated:
-        return redirect('/prihlaseni')
+        return redirect('/prihlasit')
     try:
         stitek = Stitek.objects.get(id=id)
         print("Vlastník štítku",stitek.nazev,":", stitek.vlastnik)

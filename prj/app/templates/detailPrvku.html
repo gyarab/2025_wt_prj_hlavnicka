@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Detail Prvku</h1>
-    <p>Název: {{ prvek.nazev }}</p>
-    <p>Obsah: {{ prvek.obsah }}</p>
+    <h1>{{ prvek.nazev }}</h1>
+    <p>{{ prvek.obsah }}</p>
+    <p>{% for stitek in prvek.stitky.all %}<a  href="{% url 'detail_stitku' stitek.id %}" onclick="window.open(this.href, 'NoveOkno', 'width=800,height=600,resizable=yes,scrollbars=yes'); return false;" style="color:black;text-decoration:none;background-color: {{ stitek.barva }};display:inline-block;padding:5px;border-radius:20px">{{ stitek.nazev }}</a> {% endfor %}</p>
+    <hr>
     <p>Vlastník: {{ prvek.vlastnik.username }}</p>
-    <p>Štítky: {% for stitek in prvek.stitky.all %}<a href="{% url 'detail_stitku' stitek.id %}" style="color:black;text-decoration:none;background-color: {{ stitek.barva }};display:inline-block;padding:5px;border-radius:20px">{{ stitek.nazev }}</a> {% endfor %}</p>
+    {{ prvek.vytvoreno|date:"d.m.Y H:i" }}
+    {{ prvek.upraveno|date:"d.m.Y H:i" }}
+    
 {% endblock %}

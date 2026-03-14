@@ -30,9 +30,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("test-404/", test_view),
     path("about/", about_view),
-    path("home/", home_view),
-    path('prihlaseni/', auth_views.LoginView.as_view(), name='login'),
-    path('odhlaseni/', auth_views.LogoutView.as_view(), name='logout'),
+    path("home/", home_view, name='home'),
+    path('prihlasit/', auth_views.LoginView.as_view(), name='login'),
+    path('odhlasit/', auth_views.LogoutView.as_view(), name='logout'),
     path('prvek/<int:id>/', detail_prvku, name='detail_prvku'),
     path('', home_view, name='home'),
     path("stitek/<int:id>/", detail_stitku, name="detail_stitku")

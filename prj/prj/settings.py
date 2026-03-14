@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f5(xi7e)_@8!$24dl+12i)s!)dp1j47vac(m8@xr&+vayda-z@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -122,4 +122,4 @@ STATIC_URL = 'static/'
 LOGIN_REDIRECT_URL = '/' 
 
 # Kam přesměrovat po odhlášení
-LOGOUT_REDIRECT_URL = '/prihlaseni/'
+LOGOUT_REDIRECT_URL = '/prihlasit/'

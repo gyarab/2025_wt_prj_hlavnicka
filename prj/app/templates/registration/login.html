@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Přihlášení</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Přihlášení{% endblock %}
+{% block content %}
     <h2>Přihlas se do aplikace</h2>
-    
+
     <form method="post">
         {% csrf_token %}
         
@@ -13,5 +10,4 @@
         
         <button type="submit">Přihlásit se</button>
     </form>
-</body>
-</html>
+{% endblock %}
