@@ -1,0 +1,176 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": { "username": "admin", "is_superuser": true, "is_staff": true, "email": "admin@honzaa.cz" }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": { "username": "honza", "email": "honza@honzaa.cz" }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": { "username": "petr", "email": "petr@example.com" }
+  },
+
+  {
+    "model": "app.stitek",
+    "pk": 1,
+    "fields": { "nazev": "Vysoká priorita", "barva": "#FF0000", "specialni_vyznam": "sys_priority_high", "vlastnik": null }
+  },
+  {
+    "model": "app.stitek",
+    "pk": 2,
+    "fields": { "nazev": "Veřejné", "barva": "#00FF00", "specialni_vyznam": "sys_public_access", "vlastnik": null }
+  },
+  {
+    "model": "app.stitek",
+    "pk": 3,
+    "fields": { "nazev": "Externí dokument", "barva": "#0000FF", "specialni_vyznam": "sys_ext_resource", "vlastnik": null }
+  },
+  {
+    "model": "app.stitek",
+    "pk": 4,
+    "fields": { "nazev": "Denní záznam", "barva": "#FFFF00", "specialni_vyznam": "sys_type_journal", "vlastnik": null }
+  },
+
+  {
+    "model": "app.stitek",
+    "pk": 10,
+    "fields": { "nazev": "Contextum Vývoj", "barva": "#A100FF", "specialni_vyznam": null, "vlastnik": 2 }
+  },
+  {
+    "model": "app.stitek",
+    "pk": 11,
+    "fields": { "nazev": "Nákupy", "barva": "#FFA500", "specialni_vyznam": null, "vlastnik": 2 }
+  },
+
+  {
+    "model": "app.prvek",
+    "pk": 1,
+    "fields": {
+      "nazev": "Implementace Fixtures",
+      "obsah": "Vytvořit sadu testovacích dat pro modely Prvek, Seznam a Stitek.",
+      "stitky": [1, 10],
+      "vlastnik": 2,
+      "smazano": false,
+      "archivovano": false,
+      "datum_zacatku": "2026-04-10T09:00:00Z",
+      "datum_konce": "2026-04-10T17:00:00Z",
+      "souvisejici_prvky": [2, 3]
+    }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 2,
+    "fields": {
+      "nazev": "Debugování M2M vztahů",
+      "obsah": "Zkontrolovat, zda funguje symetrické a nesymetrické propojení u Seznamů.",
+      "stitky": [10],
+      "vlastnik": 2,
+      "smazano": false,
+      "archivovano": false,
+      "souvisejici_prvky": [1]
+    }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 3,
+    "fields": {
+      "nazev": "Dokumentace na docs.honzaa.cz",
+      "obsah": "Odkaz na externí zadání projektu.",
+      "stitky": [3, 10],
+      "vlastnik": 2,
+      "smazano": false,
+      "archivovano": false
+    }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 4,
+    "fields": {
+      "nazev": "Deník: První milník splněn",
+      "obsah": "Dnes jsem úspěšně naimportoval data do databáze.",
+      "stitky": [4, 2],
+      "vlastnik": 2,
+      "smazano": false,
+      "archivovano": false,
+      "datum_zacatku": "2026-04-09T20:00:00Z"
+    }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 5,
+    "fields": { "nazev": "Koupit mléko", "stitky": [11], "vlastnik": 2, "smazano": false }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 6,
+    "fields": { "nazev": "Koupit chleba", "stitky": [11], "vlastnik": 2, "smazano": false }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 7,
+    "fields": { "nazev": "Koupit kávu (Urgente!)", "stitky": [11, 1], "vlastnik": 2, "smazano": false }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 8,
+    "fields": { "nazev": "Archivovaný starý úkol", "obsah": "Toto už nikoho nezajímá.", "stitky": [], "vlastnik": 2, "smazano": false, "archivovano": true }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 9,
+    "fields": { "nazev": "Smazaný pokus", "stitky": [], "vlastnik": 3, "smazano": true }
+  },
+
+  {
+    "model": "app.seznam",
+    "pk": 1,
+    "fields": {
+      "nazev": "Práce a Vývoj",
+      "popis": "Vše kolem kódování a Contextum.",
+      "vlastnik": 2,
+      "prvky": [1, 2, 3, 4],
+      "podseznamy": [2],
+      "stitky": [10]
+    }
+  },
+  {
+    "model": "app.seznam",
+    "pk": 2,
+    "fields": {
+      "nazev": "Bugs & Issues",
+      "popis": "Seznam chyb, které je třeba opravit.",
+      "vlastnik": 2,
+      "prvky": [2],
+      "podseznamy": [],
+      "stitky_jako_polozky": [1]
+    }
+  },
+  {
+    "model": "app.seznam",
+    "pk": 3,
+    "fields": {
+      "nazev": "Osobní",
+      "popis": "Nákupy a domácnost.",
+      "vlastnik": 2,
+      "prvky": [5, 6, 7],
+      "podseznamy": [],
+      "stitky": [11]
+    }
+  },
+  {
+    "model": "app.seznam",
+    "pk": 4,
+    "fields": {
+      "nazev": "Veřejný Archiv",
+      "popis": "Záznamy, které vidí i anonymní uživatel.",
+      "vlastnik": 1,
+      "prvky": [4],
+      "stitky": [2]
+    }
+  }
+]
