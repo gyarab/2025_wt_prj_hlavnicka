@@ -19,6 +19,9 @@ main.content{
 
     --danger:#FF8E72;
 
+    --background:#F7FBF9;
+    --background-little-accent:#f2f8f5;
+    --background-accent:#E0F2F1;
 
     --text:black;
     --text-unimportant:rgb(120, 120, 120);
@@ -28,6 +31,7 @@ main.content{
 body,html{
     margin:0;
     padding:0;
+    background-color: var(--background);
 }
 
 .stitek{
@@ -74,9 +78,7 @@ header a{
     max-width: 600px;
     margin: 2rem auto;
     padding: 2rem;
-    background: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h1 {
@@ -231,8 +233,8 @@ header a{
     margin-top: 2rem;
 }
 
-.prvek-card {
-    background: white;
+.prvek-card {/*=========================================================================================================================*/
+    background: var(--background-little-accent);
     border: 1px solid #ddd;
     border-left:4px solid var(--primary);
     border-radius: 4px;
@@ -261,12 +263,12 @@ header a{
 
 .prvek-datum {
     font-size: 0.85rem;
-    color: #999;
+    color: var(--text-unimportant);
     white-space: nowrap;
 }
 
 .prvek-obsah {
-    color: #666;
+    color: var(--text);
     font-size: 0.95rem;
     line-height: 1.5;
     margin: 0.75rem 0;
@@ -274,7 +276,7 @@ header a{
 }
 
 .prvek-obsah.empty {
-    color: #ccc;
+    color: var(--text-unimportant);
     font-style: italic;
 }
 
@@ -296,7 +298,7 @@ header a{
 .btn-link {
     padding: 0.5rem 1rem;
     background: var(--primary);
-    color: rgb(0, 0, 0);
+    color: var(--text);
     text-decoration: none;
     border-radius: 2.8px;
     font-size: 0.9rem;
@@ -312,13 +314,13 @@ header a{
 .empty-state {
     text-align: center;
     padding: 3rem 1rem;
-    background: #f9f9f9;
+    background: var(--background-little-accent);
     border-radius: 8px;
     margin-top: 2rem;
 }
 
 .empty-state p {
-    color: #666;
+    color: var(--text-unimportant);
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
 }
@@ -327,11 +329,7 @@ header a{
 .detail-container {
     max-width: 800px;
     margin: 2rem auto;
-    background: white;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+    padding: 2rem;}
 
 .detail-header {
     display: flex;
@@ -345,7 +343,7 @@ header a{
 
 .detail-header h1 {
     margin: 0;
-    color: #333;
+    color: var(--text);
     flex: 1;
 }
 
@@ -367,17 +365,17 @@ header a{
 }
 
 .detail-actions .btn-primary {
-    background: #007bff;
-    color: white;
+    background: var(--primary);
+    color: var(--text);
 }
 
 .detail-actions .btn-primary:hover {
-    background: #0056b3;
+    background: var(--primary-hover);
 }
 
 .detail-actions .btn-danger {
-    background: #dc3545;
-    color: white;
+    background: var(--danger);
+    color: var(--text);
 }
 
 .detail-actions .btn-danger:hover {
@@ -391,13 +389,13 @@ header a{
 .prvek-obsah-detail {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: #555;
+    color: var(--text);
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 
 .prvek-obsah-detail.empty {
-    color: #ccc;
+    color: var(--text-unimportant);
     font-style: italic;
 }
 
@@ -414,7 +412,7 @@ header a{
 
 .detail-metadata p {
     margin: 0.75rem 0;
-    color: #666;
+    color: var(--text-unimportant);
 }
 
 .detail-back {

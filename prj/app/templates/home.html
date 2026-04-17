@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load ceske_data %}
 {% block content %}
     <h1>Moje položky</h1>
     
@@ -26,7 +26,7 @@
                     <div class="prvek-card">
                         <div class="prvek-header">
                             <h3>{{ prvek.nazev }}</h3>
-                            <span class="prvek-datum">{{ prvek.datum_vytvoreni|date:"d.m.Y H:i" }}</span>
+                            <span class="prvek-datum">{{ prvek.datum_vytvoreni|chytre_datum }}</span>
                         </div>
                         
                         {% if prvek.obsah %}
