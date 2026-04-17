@@ -1,294 +1,400 @@
 [
-  {
-    "model": "auth.user",
-    "pk": 1,
-    "fields": { "username": "admin", "is_superuser": true, "is_staff": true, "email": "admin@honzaa.cz" }
-  },
-  {
-    "model": "auth.user",
-    "pk": 2,
-    "fields": { "username": "honza", "email": "honza@honzaa.cz" }
-  },
-  {
-    "model": "auth.user",
-    "pk": 3,
-    "fields": { "username": "petr", "email": "petr@example.com" }
-  },
+      {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+          "username": "admin",
+          "password": "pbkdf2_sha256$1200000$AwIUJTaIBp69uRrLQm6i9p$Cr2w6wUZUgjD+wL/5xsgTyfLqD5k1s6+Y/AYkniEvuE=",
+          "is_superuser": true,
+          "is_staff": true,
+          "is_active": true,
+          "email": "admin@honzaa.cz",
+          "first_name": "",
+          "last_name": "",
+          "last_login": null,
+          "date_joined": "2026-01-01T00:00:00Z"
+        }
+      },
+      {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+          "username": "honza",
+          "password": "pbkdf2_sha256$1200000$AwIUJTaIBp69uRrLQm6i9p$Cr2w6wUZUgjD+wL/5xsgTyfLqD5k1s6+Y/AYkniEvuE=",
+          "is_superuser": false,
+          "is_staff": false,
+          "is_active": true,
+          "email": "honza@honzaa.cz",
+          "first_name": "",
+          "last_name": "",
+          "last_login": null,
+          "date_joined": "2026-01-01T00:00:00Z"
+        }
+      },
+      {
+        "model": "auth.user",
+        "pk": 3,
+        "fields": {
+          "username": "petr",
+          "password": "pbkdf2_sha256$1200000$AwIUJTaIBp69uRrLQm6i9p$Cr2w6wUZUgjD+wL/5xsgTyfLqD5k1s6+Y/AYkniEvuE=",
+          "is_superuser": false,
+          "is_staff": false,
+          "is_active": true,
+          "email": "petr@example.com",
+          "first_name": "",
+          "last_name": "",
+          "last_login": null,
+          "date_joined": "2026-01-01T00:00:00Z"
+        }
+      },
 
-  {
-    "model": "app.stitek",
-    "pk": 1,
-    "fields": { "nazev": "Vysoká priorita", "barva": "#FF0000", "specialni_vyznam": "sys_priority_high", "vlastnik": null }
-  },
-  {
-    "model": "app.stitek",
-    "pk": 2,
-    "fields": { "nazev": "Veřejné", "barva": "#00FF00", "specialni_vyznam": "sys_public_access", "vlastnik": null }
-  },
-  {
-    "model": "app.stitek",
-    "pk": 3,
-    "fields": { "nazev": "Externí dokument", "barva": "#0000FF", "specialni_vyznam": "sys_ext_resource", "vlastnik": null }
-  },
-  {
-    "model": "app.stitek",
-    "pk": 4,
-    "fields": { "nazev": "Denní záznam", "barva": "#FFFF00", "specialni_vyznam": "sys_type_journal", "vlastnik": null }
-  },
+      {
+        "model": "app.stitek",
+        "pk": 1,
+        "fields": { "nazev": "Vysok\u00e1 priorita", "barva": "#FF0000", "specialni_vyznam": "sys_priority_high", "vlastnik": null }
+      },
+      {
+        "model": "app.stitek",
+        "pk": 2,
+        "fields": { "nazev": "Ve\u0159ejn\u00e9", "barva": "#00FF00", "specialni_vyznam": "sys_public_access", "vlastnik": null }
+      },
+      {
+        "model": "app.stitek",
+        "pk": 3,
+        "fields": { "nazev": "Extern\u00ed dokument", "barva": "#0000FF", "specialni_vyznam": "sys_ext_resource", "vlastnik": null }
+      },
+      {
+        "model": "app.stitek",
+        "pk": 4,
+        "fields": { "nazev": "Denn\u00ed z\u00e1znam", "barva": "#FFFF00", "specialni_vyznam": "sys_type_journal", "vlastnik": null }
+      },
+      {
+        "model": "app.stitek",
+        "pk": 10,
+        "fields": { "nazev": "Contextum V\u00fdvoj", "barva": "#A100FF", "specialni_vyznam": null, "vlastnik": 2 }
+      },
+      {
+        "model": "app.stitek",
+        "pk": 11,
+        "fields": { "nazev": "N\u00e1kupy", "barva": "#FFA500", "specialni_vyznam": null, "vlastnik": 2 }
+      },
 
-  {
-    "model": "app.stitek",
-    "pk": 10,
-    "fields": { "nazev": "Contextum Vývoj", "barva": "#A100FF", "specialni_vyznam": null, "vlastnik": 2 }
-  },
-  {
-    "model": "app.stitek",
-    "pk": 11,
-    "fields": { "nazev": "Nákupy", "barva": "#FFA500", "specialni_vyznam": null, "vlastnik": 2 }
-  },
+      {
+        "model": "app.prvek",
+        "pk": 1,
+        "fields": {
+          "nazev": "Implementace Fixtures",
+          "obsah": "Vytvo\u0159it sadu testovac\u00edch dat pro modely Prvek, Seznam a Stitek.",
+          "stitky": [1, 10],
+          "vlastnik": 2,
+          "smazano": false,
+            "archivovano": false,
+            "datum_vytvoreni": "2026-04-10T09:00:00Z",
+            "datum_upravy": "2026-04-10T09:00:00Z",
+          "datum_zacatku": "2026-04-10T09:00:00Z",
+          "datum_konce": "2026-04-10T17:00:00Z",
+          "souvisejici_prvky": [2, 3]
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 2,
+        "fields": {
+          "nazev": "Debugov\u00e1n\u00ed M2M vztah\u016f",
+          "obsah": "Zkontrolovat, zda funguje symetrick\u00e9 a nesymetrick\u00e9 propojen\u00ed u Seznam\u016f.",
+          "stitky": [10],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z",
+          "souvisejici_prvky": [1]
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 3,
+        "fields": {
+          "nazev": "Dokumentace na docs.honzaa.cz",
+          "obsah": "Odkaz na extern\u00ed zad\u00e1n\u00ed projektu.",
+          "stitky": [3, 10],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z"
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 4,
+        "fields": {
+          "nazev": "Den\u00edk: Prvn\u00ed miln\u00edk spln\u011bn",
+          "obsah": "Dnes jsem \u00fasp\u011b\u0161n\u011b naimportoval data do datab\u00e1ze.",
+          "stitky": [4, 2],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-09T20:00:00Z",
+          "datum_upravy": "2026-04-09T20:00:00Z",
+          "datum_zacatku": "2026-04-09T20:00:00Z"
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 5,
+        "fields": {
+          "nazev": "Koupit ml\u00e9ko",
+          "stitky": [11],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z"
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 6,
+        "fields": {
+          "nazev": "Koupit chleba",
+          "stitky": [11],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z"
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 7,
+        "fields": {
+          "nazev": "Koupit k\u00e1vu (Urgente!)",
+          "stitky": [11, 1],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z"
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 8,
+        "fields": {
+          "nazev": "Archivovan\u00fd star\u00fd \u00fakol",
+          "obsah": "Toto u\u017e nikoho nezaj\u00edm\u00e1.",
+          "stitky": [],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": true,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z"
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 9,
+        "fields": {
+          "nazev": "Smazan\u00fd pokus",
+          "stitky": [],
+          "vlastnik": 3,
+          "smazano": true,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z"
+        }
+      },
 
-  {
-    "model": "app.prvek",
-    "pk": 1,
-    "fields": {
-      "nazev": "Implementace Fixtures",
-      "obsah": "Vytvořit sadu testovacích dat pro modely Prvek, Seznam a Stitek.",
-      "stitky": [1, 10],
-      "vlastnik": 2,
-      "smazano": false,
-      "archivovano": false,
-      "datum_zacatku": "2026-04-10T09:00:00Z",
-      "datum_konce": "2026-04-10T17:00:00Z",
-      "souvisejici_prvky": [2, 3]
-    }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 2,
-    "fields": {
-      "nazev": "Debugování M2M vztahů",
-      "obsah": "Zkontrolovat, zda funguje symetrické a nesymetrické propojení u Seznamů.",
-      "stitky": [10],
-      "vlastnik": 2,
-      "smazano": false,
-      "archivovano": false,
-      "souvisejici_prvky": [1]
-    }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 3,
-    "fields": {
-      "nazev": "Dokumentace na docs.honzaa.cz",
-      "obsah": "Odkaz na externí zadání projektu.",
-      "stitky": [3, 10],
-      "vlastnik": 2,
-      "smazano": false,
-      "archivovano": false
-    }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 4,
-    "fields": {
-      "nazev": "Deník: První milník splněn",
-      "obsah": "Dnes jsem úspěšně naimportoval data do databáze.",
-      "stitky": [4, 2],
-      "vlastnik": 2,
-      "smazano": false,
-      "archivovano": false,
-      "datum_zacatku": "2026-04-09T20:00:00Z"
-    }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 5,
-    "fields": { "nazev": "Koupit mléko", "stitky": [11], "vlastnik": 2, "smazano": false }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 6,
-    "fields": { "nazev": "Koupit chleba", "stitky": [11], "vlastnik": 2, "smazano": false }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 7,
-    "fields": { "nazev": "Koupit kávu (Urgente!)", "stitky": [11, 1], "vlastnik": 2, "smazano": false }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 8,
-    "fields": { "nazev": "Archivovaný starý úkol", "obsah": "Toto už nikoho nezajímá.", "stitky": [], "vlastnik": 2, "smazano": false, "archivovano": true }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 9,
-    "fields": { "nazev": "Smazaný pokus", "stitky": [], "vlastnik": 3, "smazano": true }
-  },
+      {
+        "model": "app.seznam",
+        "pk": 1,
+        "fields": {
+          "nazev": "Pr\u00e1ce a V\u00fdvoj",
+          "popis": "V\u0161e kolem k\u00f3dov\u00e1n\u00ed a Contextum.",
+          "vlastnik": 2,
+          "prvky": [1, 2, 3, 4],
+          "podseznamy": [2],
+          "stitky": [10]
+        }
+      },
+      {
+        "model": "app.seznam",
+        "pk": 2,
+        "fields": {
+          "nazev": "Bugs & Issues",
+          "popis": "Seznam chyb, kter\u00e9 je t\u0159eba opravit.",
+          "vlastnik": 2,
+          "prvky": [2],
+          "podseznamy": [],
+          "stitky_jako_polozky": [1]
+        }
+      },
+      {
+        "model": "app.seznam",
+        "pk": 3,
+        "fields": {
+          "nazev": "Osobn\u00ed",
+          "popis": "N\u00e1kupy a dom\u00e1cnost.",
+          "vlastnik": 2,
+          "prvky": [5, 6, 7],
+          "podseznamy": [],
+          "stitky": [11]
+        }
+      },
+      {
+        "model": "app.seznam",
+        "pk": 4,
+        "fields": {
+          "nazev": "Ve\u0159ejn\u00fd Archiv",
+          "popis": "Z\u00e1znamy, kter\u00e9 vid\u00ed i anonymn\u00ed u\u017eivatel.",
+          "vlastnik": 1,
+          "prvky": [4],
+          "stitky": [2]
+        }
+      },
 
-  {
-    "model": "app.seznam",
-    "pk": 1,
-    "fields": {
-      "nazev": "Práce a Vývoj",
-      "popis": "Vše kolem kódování a Contextum.",
-      "vlastnik": 2,
-      "prvky": [1, 2, 3, 4],
-      "podseznamy": [2],
-      "stitky": [10]
-    }
-  },
-  {
-    "model": "app.seznam",
-    "pk": 2,
-    "fields": {
-      "nazev": "Bugs & Issues",
-      "popis": "Seznam chyb, které je třeba opravit.",
-      "vlastnik": 2,
-      "prvky": [2],
-      "podseznamy": [],
-      "stitky_jako_polozky": [1]
-    }
-  },
-  {
-    "model": "app.seznam",
-    "pk": 3,
-    "fields": {
-      "nazev": "Osobní",
-      "popis": "Nákupy a domácnost.",
-      "vlastnik": 2,
-      "prvky": [5, 6, 7],
-      "podseznamy": [],
-      "stitky": [11]
-    }
-  },
-  {
-    "model": "app.seznam",
-    "pk": 4,
-    "fields": {
-      "nazev": "Veřejný Archiv",
-      "popis": "Záznamy, které vidí i anonymní uživatel.",
-      "vlastnik": 1,
-      "prvky": [4],
-      "stitky": [2]
-    }
-  
-  },
+      {
+        "model": "app.stitek",
+        "pk": 5,
+        "fields": { "nazev": "Koncept", "barva": "#D3D3D3", "specialni_vyznam": "sys_status_draft", "vlastnik": null }
+      },
+      {
+        "model": "app.stitek",
+        "pk": 6,
+        "fields": { "nazev": "D\u016fle\u017eit\u00e9", "barva": "#E74C3C", "specialni_vyznam": "sys_mark_starred", "vlastnik": null }
+      },
 
-  {
-    "model": "app.stitek",
-    "pk": 5,
-    "fields": { "nazev": "Koncept", "barva": "#D3D3D3", "specialni_vyznam": "sys_status_draft", "vlastnik": null }
-  },
-  {
-    "model": "app.stitek",
-    "pk": 6,
-    "fields": { "nazev": "Důležité", "barva": "#E74C3C", "specialni_vyznam": "sys_mark_starred", "vlastnik": null }
-  },
+      {
+        "model": "app.prvek",
+        "pk": 10,
+        "fields": {
+          "nazev": "Anal\u00fdza algoritm\u016f pro pl\u00e1nova\u010d",
+          "obsah": "Prostudovat genetick\u00e9 algoritmy vs. jednoduch\u00fd heuristick\u00fd scheduling.",
+          "stitky": [1, 5, 10],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-12T10:00:00Z",
+          "datum_upravy": "2026-04-12T10:00:00Z",
+          "datum_zacatku": "2026-04-12T10:00:00Z",
+          "souvisejici_prvky": [11, 12]
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 11,
+        "fields": {
+          "nazev": "Definice \u010dasov\u00fdch oken",
+          "obsah": "U\u017eivatel mus\u00ed m\u00edt mo\u017enost definovat 'Focus time' a 'Routine'.",
+          "stitky": [10],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z",
+          "souvisejici_prvky": [10]
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 12,
+        "fields": {
+          "nazev": "Integrace s docs.honzaa.cz API",
+          "obsah": "Na\u010d\u00edt\u00e1n\u00ed metadat z extern\u00edch dokument\u016f pro kontextov\u00e9 pl\u00e1nov\u00e1n\u00ed.",
+          "stitky": [3, 10],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z",
+          "souvisejici_prvky": [10]
+        }
+      },
 
-  {
-    "model": "app.prvek",
-    "pk": 10,
-    "fields": {
-      "nazev": "Analýza algoritmů pro plánovač",
-      "obsah": "Prostudovat genetické algoritmy vs. jednoduchý heuristický scheduling.",
-      "stitky": [1, 5, 10],
-      "vlastnik": 2,
-      "smazano": false,
-      "archivovano": false,
-      "datum_zacatku": "2026-04-12T10:00:00Z",
-      "souvisejici_prvky": [11, 12]
-    }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 11,
-    "fields": {
-      "nazev": "Definice časových oken",
-      "obsah": "Uživatel musí mít možnost definovat 'Focus time' a 'Routine'.",
-      "stitky": [10],
-      "vlastnik": 2,
-      "souvisejici_prvky": [10]
-    }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 12,
-    "fields": {
-      "nazev": "Integrace s docs.honzaa.cz API",
-      "obsah": "Načítání metadat z externích dokumentů pro kontextové plánování.",
-      "stitky": [3, 10],
-      "vlastnik": 2,
-      "souvisejici_prvky": [10]
-    }
-  },
+      {
+        "model": "app.prvek",
+        "pk": 13,
+        "fields": {
+          "nazev": "Den\u00edk: 15. dubna 2026",
+          "obsah": "Dneska to \u0161lo ztuha, ale API pro integraci funguje. Zaseknul jsem se na CORS.",
+          "stitky": [4],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-15T22:30:00Z",
+          "datum_upravy": "2026-04-15T22:30:00Z",
+          "datum_zacatku": "2026-04-15T22:30:00Z"
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 14,
+        "fields": {
+          "nazev": "Den\u00edk: 16. dubna 2026",
+          "obsah": "Refaktoring model\u016f Seznam a Prvek hotov. Fixtures vypadaj\u00ed dob\u0159e.",
+          "stitky": [4, 6],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-16T21:00:00Z",
+          "datum_upravy": "2026-04-16T21:00:00Z",
+          "datum_zacatku": "2026-04-16T21:00:00Z"
+        }
+      },
 
-  {
-    "model": "app.prvek",
-    "pk": 13,
-    "fields": {
-      "nazev": "Deník: 15. dubna 2026",
-      "obsah": "Dneska to šlo ztuha, ale API pro integraci funguje. Zaseknul jsem se na CORS.",
-      "stitky": [4],
-      "vlastnik": 2,
-      "datum_zacatku": "2026-04-15T22:30:00Z"
-    }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 14,
-    "fields": {
-      "nazev": "Deník: 16. dubna 2026",
-      "obsah": "Refaktoring modelů Seznam a Prvek hotov. Fixtures vypadají dobře.",
-      "stitky": [4, 6],
-      "vlastnik": 2,
-      "datum_zacatku": "2026-04-16T21:00:00Z"
-    }
-  },
+      {
+        "model": "app.prvek",
+        "pk": 15,
+        "fields": {
+          "nazev": "P\u0159\u00edli\u0161 \u017elu\u0165ou\u010dk\u00fd k\u016f\u0148 \u00fap\u011bl \u010f\u00e1belsk\u00e9 \u00f3dy \ud83d\udc0e",
+          "obsah": "Test k\u00f3dov\u00e1n\u00ed \u010de\u0161tiny a emoji v TextField. !@#$%^&*()_+",
+          "stitky": [2],
+          "vlastnik": 2,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z"
+        }
+      },
+      {
+        "model": "app.prvek",
+        "pk": 16,
+        "fields": {
+          "nazev": "Kr\u00e1tk\u00fd \u00fakol",
+          "obsah": null,
+          "stitky": [],
+          "vlastnik": 3,
+          "smazano": false,
+          "archivovano": false,
+          "datum_vytvoreni": "2026-04-17T11:00:00Z",
+          "datum_upravy": "2026-04-17T11:00:00Z"
+        }
+      },
 
-  {
-    "model": "app.prvek",
-    "pk": 15,
-    "fields": {
-      "nazev": "Příliš žluťoučký kůň úpěl ďábelské ódy 🐎",
-      "obsah": "Test kódování češtiny a emoji v TextField. !@#$%^&*()_+",
-      "stitky": [2],
-      "vlastnik": 2
-    }
-  },
-  {
-    "model": "app.prvek",
-    "pk": 16,
-    "fields": {
-      "nazev": "Krátký úkol",
-      "obsah": null,
-      "stitky": [],
-      "vlastnik": 3
-    }
-  },
-
-  {
-    "model": "app.seznam",
-    "pk": 5,
-    "fields": {
-      "nazev": "Plánovač (V2)",
-      "popis": "Pokročilé funkce plánování.",
-      "vlastnik": 2,
-      "prvky": [10, 11, 12],
-      "podseznamy": [],
-      "stitky": [10]
-    }
-  },
-  {
-    "model": "app.seznam",
-    "pk": 6,
-    "fields": {
-      "nazev": "Deníky a Historie",
-      "popis": "Archiv všech deníkových záznamů.",
-      "vlastnik": 2,
-      "prvky": [4, 13, 14],
-      "podseznamy": [],
-      "stitky": [4]
-    }
-  }
-]
+      {
+        "model": "app.seznam",
+        "pk": 5,
+        "fields": {
+          "nazev": "Pl\u00e1nova\u010d (V2)",
+          "popis": "Pokro\u010dil\u00e9 funkce pl\u00e1nov\u00e1n\u00ed.",
+          "vlastnik": 2,
+          "prvky": [10, 11, 12],
+          "podseznamy": [],
+          "stitky": [10]
+        }
+      },
+      {
+        "model": "app.seznam",
+        "pk": 6,
+        "fields": {
+          "nazev": "Den\u00edky a Historie",
+          "popis": "Archiv v\u0161ech den\u00edkov\u00fdch z\u00e1znam\u016f.",
+          "vlastnik": 2,
+          "prvky": [4, 13, 14],
+          "podseznamy": [],
+          "stitky": [4]
+        }
+      }
+    ]
