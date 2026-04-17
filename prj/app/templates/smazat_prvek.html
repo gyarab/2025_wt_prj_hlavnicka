@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Smazat prvek{% endblock %}
+
+{% block content %}
+<div class="delete-container">
+    <div class="delete-warning">
+        <h1>⚠️ Smazat prvek?</h1>
+        <p>Skutečně chceš smazat prvek <strong>"{{ prvek.nazev }}"</strong>?</p>
+        <p class="delete-note">Tato akce je nevratná.</p>
+        
+        <form method="post" class="delete-form">
+            {% csrf_token %}
+            <div class="delete-actions">
+                <button type="submit" class="btn-danger">Ano, smazat</button>
+                <a href="{% url 'detail_prvku' prvek.id %}" class="btn-secondary">Ne, vrátit se</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}Přidat Prvek{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Nový záznam</h1>
+    
+    <form method="post" id="main-form" class="prvek-form">
+        {% csrf_token %}
+        
+        <div style="display: none;">
+            {{ form.nazev }}
+            {{ form.obsah }}
+            {{ form.stitky }}
+        </div>
+
+        <div 
+            id="notion-editor" 
+            class="editor-area" 
+            contenteditable="true" 
+            data-placeholder="Nadpis záznamu..."
+        ></div>
+        
+        <div id="tags-preview" class="tags-preview"></div>
+
+        <div class="form-actions" style="margin-top: 20px;">
+            <button type="submit" class="btn-primary">Uložit prvek</button>
+            <a href="/home" class="btn-secondary">Zrušit</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    /* Stylování editoru */
+    .editor-area {
+        border: 1px solid #ddd;
+        padding: 30px;
+        min-height: 400px;
+        border-radius: 12px;
+        background: #fff;
+        line-height: 1.6;
+        outline: none;
+        font-size: 1.1rem;
+        color: #333;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: border-color 0.2s;
+    }
+
+    .editor-area:focus {
+        border-color: #007bff;
+    }
+
+    /* Placeholder logika pro div */
+    .editor-area:empty:before {
+        content: attr(data-placeholder);
+        color: #aaa;
+        font-weight: bold;
+    }
+
+    /* První řádek se chová jako nadpis (H1) */
+    /* Většina prohlížečů vkládá první řádek přímo do textu nebo do <div> */
+    .editor-area div:first-child, 
+    .editor-area:first-line {
+        font-size: 2.2rem;
+        font-weight: 800;
+        line-height: 1.2;
+        color: #111;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    /* Štítky pod editorem */
+    .tags-preview {
+        margin-top: 15px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .tag-badge {
+        background: #eff6ff;
+        color: #2563eb;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border: 1px solid #dbeafe;
+    }
+
+    /* Tlačítka */
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .btn-primary {
+        background-color: #2563eb;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .btn-secondary {
+        text-decoration: none;
+        color: #666;
+        font-size: 0.9rem;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const editor = document.getElementById('notion-editor');
+    const inputNazev = document.querySelector('input[name="nazev"]');
+    const inputObsah = document.querySelector('textarea[name="obsah"]'); // nebo input podle typu ve Formu
+    const inputStitky = document.querySelector('input[name="stitky"]');
+    const tagsPreview = document.getElementById('tags-preview');
+
+    // Funkce pro zpracování obsahu
+    function updateHiddenFields() {
+        // Získáme text z editoru (innerText zachovává zalomení řádků)
+        const fullText = editor.innerText;
+        const lines = fullText.split('\n');
+
+        // 1. Nadpis je první řádek
+        const title = lines[0] || '';
+        inputNazev.value = title;
+
+        // 2. Obsah je všechno ostatní
+        const content = lines.slice(1).join('\n').trim();
+        inputObsah.value = content;
+
+        // 3. Extrakce hashtagů (#tag)
+        // Regex hledá slova začínající mřížkou
+        const hashtagRegex = /#([\w\u00C0-\u017F]+)/g; // Podpora i pro českou diakritiku
+        const matches = fullText.match(hashtagRegex) || [];
+        
+        // Odstraníme duplicity a křížky pro uložení do databáze
+        const cleanTags = [...new Set(matches.map(t => t.substring(1)))];
+        
+        // Uložíme do skrytého pole (předpokládáme formát oddělený čárkou)
+        inputStitky.value = cleanTags.join(', ');
+
+        // 4. Aktualizace vizuálních štítků
+        renderTags(cleanTags);
+    }
+
+    function renderTags(tags) {
+        tagsPreview.innerHTML = '';
+        tags.forEach(tag => {
+            const span = document.createElement('span');
+            span.className = 'tag-badge';
+            span.textContent = '#' + tag;
+            tagsPreview.appendChild(span);
+        });
+    }
+
+    // Sledování psaní
+    editor.addEventListener('input', updateHiddenFields);
+
+    // Ošetření vkládání (Paste) - chceme pouze čistý text, ne HTML z jiných webů
+    editor.addEventListener('paste', function(e) {
+        e.preventDefault();
+        const text = (e.originalEvent || e).clipboardData.getData('text/plain');
+        document.execCommand("insertHTML", false, text);
+    });
+
+    // Bonus: Pokud uživatel stiskne Enter na prvním řádku, zajistíme odskočení do normálního textu
+    editor.addEventListener('keydown', function(e) {
+        // Ctrl+Enter (nebo Cmd+Enter na Macu) pro odeslání formuláře
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('main-form').submit();
+        }
+    });
+});
+</script>
+{% endblock %}

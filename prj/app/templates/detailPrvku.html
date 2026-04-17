@@ -1,12 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>{{ prvek.nazev }}</h1>
-    <p>{{ prvek.obsah }}</p>
-    <p>{% for stitek in prvek.stitky.all %}<a  href="{% url 'detail_stitku' stitek.id %}" onclick="window.open(this.href, 'NoveOkno', 'width=800,height=600,resizable=yes,scrollbars=yes'); return false;" style="color:black;text-decoration:none;background-color: {{ stitek.barva }};display:inline-block;padding:5px;border-radius:20px">{{ stitek.nazev }}</a> {% endfor %}</p>
-    <hr>
-    <p>Vlastník: {{ prvek.vlastnik.username }}</p>
-    {{ prvek.vytvoreno|date:"d.m.Y H:i" }}
-    {{ prvek.upraveno|date:"d.m.Y H:i" }}
-    
+    <div class="detail-container">
+        <div class="detail-header">
+            <h1>{{ prvek.nazev }}</h1>
+            {% if prvek.vlastnik == request.user %}
+                <div class="detail-actions">
+                    <a href="{% url 'upravit_prvek' prvek.id %}" class="btn-primary">Upravit</a>
+                    <a href="{% url 'smazat_prvek' prvek.id %}" class="btn-danger">Smazat</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="detail-content">
+            {% if prvek.obsah %}
+                <p class="prvek-obsah-detail">{{ prvek.obsah }}</p>
+            {% else %}
+                <p class="prvek-obsah-detail empty">Bez obsahu</p>
+            {% endif %}
+        </div>
+
+        {% if prvek.stitky.all %}
+            <div class="detail-stitky">
+                {% for stitek in prvek.stitky.all %}
+                    <a href="{% url 'detail_stitku' stitek.id %}" class="stitek" style="background-color: {{ stitek.barva }};">
+                        {{ stitek.nazev }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="detail-metadata">
+            <hr>
+            <p><strong>Vlastník:</strong> {{ prvek.vlastnik.username }}</p>
+            <p><strong>Vytvořeno:</strong> {{ prvek.datum_vytvoreni|date:"d.m.Y H:i" }}</p>
+            <p><strong>Poslední úprava:</strong> {{ prvek.datum_upravy|date:"d.m.Y H:i" }}</p>
+        </div>
+
+        <div class="detail-back">
+            <a href="{% url 'home' %}" class="btn-secondary">Zpět na seznam</a>
+        </div>
+    </div>
 {% endblock %}

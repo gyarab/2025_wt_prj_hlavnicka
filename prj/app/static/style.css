@@ -8,6 +8,28 @@ main.content{
 
 }
 
+:root{
+    --primary:rgb(104, 207, 173);  
+    --primary-hover:rgb(82, 184, 152);
+    --primary-active:rgb(62, 148, 122);
+
+    --secondary: #34495E;
+    --secondary-hover: #2C3E50;
+    --secondary-active: #1A242F;
+
+    --danger:#FF8E72;
+
+
+    --text:black;
+    --text-unimportant:rgb(120, 120, 120);
+
+}
+
+body,html{
+    margin:0;
+    padding:0;
+}
+
 .stitek{
     color:black;
     text-decoration:none;
@@ -21,7 +43,18 @@ main.content{
 header{
     display:flex;
     align-items:center;
-    gap:5px
+    gap:5px;
+    background-color: rgb(104, 207, 173);
+    padding:10px;
+    margin:0;
+    border-bottom: 2px solid darkgreen;
+}
+
+header a{
+    color:black;
+    text-decoration:underline rgb(63, 42, 2);
+    font-weight:500;
+
 }
 
 .vycpavka-hlavicka{
@@ -34,4 +67,442 @@ header{
     align-items:center;
     flex:1;
     gap:1em;
+}
+
+/* Form styling */
+.form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.prvek-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+.form-group select[multiple] {
+    padding: 0.5rem;
+}
+
+.form-group select[multiple] option {
+    padding: 0.5rem;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.alert-error {
+    padding: 1rem;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #545b62;
+}
+
+/* Home page - items list */
+.filter-section {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0 2rem 0;
+    border: 1px solid #ddd;
+}
+
+.filter-form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-form label {
+    font-weight: 500;
+    color: #555;
+}
+
+.filter-select {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: white;
+    transition: border-color 0.2s;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.prvky-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.prvek-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-left:4px solid var(--primary);
+    border-radius: 4px;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.prvek-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.75rem;
+}
+
+.prvek-header h3 {
+    margin: 0;
+    color: #333;
+    word-break: break-word;
+    flex: 1;
+}
+
+.prvek-datum {
+    font-size: 0.85rem;
+    color: #999;
+    white-space: nowrap;
+}
+
+.prvek-obsah {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0.75rem 0;
+    flex: 1;
+}
+
+.prvek-obsah.empty {
+    color: #ccc;
+    font-style: italic;
+}
+
+.prvek-stitky {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.prvek-akce {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.btn-link {
+    padding: 0.5rem 1rem;
+    background: var(--primary);
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    border-radius: 2.8px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-link:hover {
+    background: var(--primary-accent);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.empty-state p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Detail prvku */
+.detail-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #eee;
+}
+
+.detail-header h1 {
+    margin: 0;
+    color: #333;
+    flex: 1;
+}
+
+.detail-actions {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.detail-actions .btn-primary,
+.detail-actions .btn-danger {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.detail-actions .btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.detail-actions .btn-primary:hover {
+    background: #0056b3;
+}
+
+.detail-actions .btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.detail-actions .btn-danger:hover {
+    background: #c82333;
+}
+
+.detail-content {
+    margin: 2rem 0;
+}
+
+.prvek-obsah-detail {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.prvek-obsah-detail.empty {
+    color: #ccc;
+    font-style: italic;
+}
+
+.detail-stitky {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2rem 0;
+}
+
+.detail-metadata {
+    margin: 2rem 0;
+}
+
+.detail-metadata p {
+    margin: 0.75rem 0;
+    color: #666;
+}
+
+.detail-back {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.detail-back .btn-secondary {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.detail-back .btn-secondary:hover {
+    background: #545b62;
+}
+
+/* Delete confirmation */
+.delete-container {
+    max-width: 500px;
+    margin: 4rem auto;
+}
+
+.delete-warning {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.delete-warning h1 {
+    color: #856404;
+    margin-top: 0;
+}
+
+.delete-warning p {
+    color: #856404;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+}
+
+.delete-note {
+    font-weight: bold;
+    color: #dc3545;
+}
+
+.delete-form {
+    margin-top: 2rem;
+}
+
+.delete-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.delete-actions .btn-danger,
+.delete-actions .btn-secondary {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.delete-actions .btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.delete-actions .btn-danger:hover {
+    background: #c82333;
+}
+
+.delete-actions .btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.delete-actions .btn-secondary:hover {
+    background: #545b62;
 }

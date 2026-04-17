@@ -1,20 +1,59 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Prvek, Stitek
+from django import forms
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 # Create your views here.
+
+class PrvekForm(forms.ModelForm):
+    class Meta:
+        model = Prvek
+        fields = ['nazev', 'obsah', 'stitky']
+        labels = {
+            'nazev': 'Název prvku',
+            'obsah': 'Obsah',
+            'stitky': 'Štítky'
+        }
 
 def custom_404(request, exception):
     return render(request, "404.html", status=404)
 
-from django.http import Http404
-from django.shortcuts import redirect
-
 def test_view(request):
     raise Http404("Not found")
 
+@login_required(login_url='/prihlasit')
+def pridat_prvek(request):
+    if request.method == 'POST':
+        form = PrvekForm(request.POST)
+        if form.is_valid():
+            prvek = form.save(commit=False)
+            prvek.vlastnik = request.user
+            prvek.save()
+            form.save_m2m()  # Uloží many-to-many relationship (stitky)
+            return redirect('/home')
+    else:
+        form = PrvekForm()
+    
+    return render(request, 'pridat_prvek.html', {'form': form})
+
 
 def home_view(request):
-    return render(request, "home.html")
+    if request.user.is_authenticated:
+        prvky = Prvek.objects.filter(vlastnik=request.user, smazano=False).order_by('-datum_vytvoreni')
+        
+        # Filtrování podle štítku
+        stitek_id = request.GET.get('stitek')
+        if stitek_id:
+            prvky = prvky.filter(stitky__id=stitek_id)
+        
+        # Získání všech štítků uživatele pro filtr
+        stitky = Stitek.objects.filter(vlastnik=request.user).order_by('nazev')
+    else:
+        prvky = []
+        stitky = []
+    
+    return render(request, "home.html", {"prvky": prvky, "stitky": stitky, "selected_stitek": request.GET.get('stitek')})
 
 def about_view(request):
     return render(request, "about.html")
@@ -30,6 +69,47 @@ def detail_prvku(request, id):
     if not prvek.vlastnik == request.user and not prvek.vlastnik == None:
         raise Http404("Prvek nenalezen")
     return render(request, "detailPrvku.html", {"prvek": prvek})
+
+@login_required(login_url='/prihlasit')
+def upravit_prvek(request, id):
+    try:
+        prvek = Prvek.objects.get(id=id)
+    except Prvek.DoesNotExist:
+        raise Http404("Prvek nenalezen")
+    
+    # Ověřit, že uživatel je vlastník prvku
+    if prvek.vlastnik != request.user:
+        raise Http404("Prvek nenalezen")
+    
+    if request.method == 'POST':
+        form = PrvekForm(request.POST, instance=prvek)
+        if form.is_valid():
+            prvek = form.save(commit=False)
+            prvek.save()
+            form.save_m2m()
+            return redirect('detail_prvku', id=prvek.id)
+    else:
+        form = PrvekForm(instance=prvek)
+    
+    return render(request, 'upravit_prvek.html', {'form': form, 'prvek': prvek})
+
+@login_required(login_url='/prihlasit')
+def smazat_prvek(request, id):
+    try:
+        prvek = Prvek.objects.get(id=id)
+    except Prvek.DoesNotExist:
+        raise Http404("Prvek nenalezen")
+    
+    # Ověřit, že uživatel je vlastník prvku
+    if prvek.vlastnik != request.user:
+        raise Http404("Prvek nenalezen")
+    
+    if request.method == 'POST':
+        prvek.smazano = True
+        prvek.save()
+        return redirect('home')
+    
+    return render(request, 'smazat_prvek.html', {'prvek': prvek})
 
 def detail_stitku(request,id):
     if not request.user.is_authenticated:
