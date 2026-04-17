@@ -172,5 +172,123 @@
       "prvky": [4],
       "stitky": [2]
     }
+  
+  },
+
+  {
+    "model": "app.stitek",
+    "pk": 5,
+    "fields": { "nazev": "Koncept", "barva": "#D3D3D3", "specialni_vyznam": "sys_status_draft", "vlastnik": null }
+  },
+  {
+    "model": "app.stitek",
+    "pk": 6,
+    "fields": { "nazev": "Důležité", "barva": "#E74C3C", "specialni_vyznam": "sys_mark_starred", "vlastnik": null }
+  },
+
+  {
+    "model": "app.prvek",
+    "pk": 10,
+    "fields": {
+      "nazev": "Analýza algoritmů pro plánovač",
+      "obsah": "Prostudovat genetické algoritmy vs. jednoduchý heuristický scheduling.",
+      "stitky": [1, 5, 10],
+      "vlastnik": 2,
+      "smazano": false,
+      "archivovano": false,
+      "datum_zacatku": "2026-04-12T10:00:00Z",
+      "souvisejici_prvky": [11, 12]
+    }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 11,
+    "fields": {
+      "nazev": "Definice časových oken",
+      "obsah": "Uživatel musí mít možnost definovat 'Focus time' a 'Routine'.",
+      "stitky": [10],
+      "vlastnik": 2,
+      "souvisejici_prvky": [10]
+    }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 12,
+    "fields": {
+      "nazev": "Integrace s docs.honzaa.cz API",
+      "obsah": "Načítání metadat z externích dokumentů pro kontextové plánování.",
+      "stitky": [3, 10],
+      "vlastnik": 2,
+      "souvisejici_prvky": [10]
+    }
+  },
+
+  {
+    "model": "app.prvek",
+    "pk": 13,
+    "fields": {
+      "nazev": "Deník: 15. dubna 2026",
+      "obsah": "Dneska to šlo ztuha, ale API pro integraci funguje. Zaseknul jsem se na CORS.",
+      "stitky": [4],
+      "vlastnik": 2,
+      "datum_zacatku": "2026-04-15T22:30:00Z"
+    }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 14,
+    "fields": {
+      "nazev": "Deník: 16. dubna 2026",
+      "obsah": "Refaktoring modelů Seznam a Prvek hotov. Fixtures vypadají dobře.",
+      "stitky": [4, 6],
+      "vlastnik": 2,
+      "datum_zacatku": "2026-04-16T21:00:00Z"
+    }
+  },
+
+  {
+    "model": "app.prvek",
+    "pk": 15,
+    "fields": {
+      "nazev": "Příliš žluťoučký kůň úpěl ďábelské ódy 🐎",
+      "obsah": "Test kódování češtiny a emoji v TextField. !@#$%^&*()_+",
+      "stitky": [2],
+      "vlastnik": 2
+    }
+  },
+  {
+    "model": "app.prvek",
+    "pk": 16,
+    "fields": {
+      "nazev": "Krátký úkol",
+      "obsah": null,
+      "stitky": [],
+      "vlastnik": 3
+    }
+  },
+
+  {
+    "model": "app.seznam",
+    "pk": 5,
+    "fields": {
+      "nazev": "Plánovač (V2)",
+      "popis": "Pokročilé funkce plánování.",
+      "vlastnik": 2,
+      "prvky": [10, 11, 12],
+      "podseznamy": [],
+      "stitky": [10]
+    }
+  },
+  {
+    "model": "app.seznam",
+    "pk": 6,
+    "fields": {
+      "nazev": "Deníky a Historie",
+      "popis": "Archiv všech deníkových záznamů.",
+      "vlastnik": 2,
+      "prvky": [4, 13, 14],
+      "podseznamy": [],
+      "stitky": [4]
+    }
   }
 ]
