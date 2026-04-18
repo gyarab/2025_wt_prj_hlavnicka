@@ -35,6 +35,9 @@
             <p><strong>Vlastník:</strong> {{ prvek.vlastnik.username }}</p>
             <p><strong>Vytvořeno:</strong> {{ prvek.datum_vytvoreni|chytre_datum }}</p>
             <p><strong>Poslední úprava:</strong> {{ prvek.datum_upravy|chytre_datum }}</p>
+            <hr>
+            <p><strong>Začátek:</strong> {{ prvek.datum_zacatku|chytre_datum }}</p>
+            <p><strong>Konec:</strong> {{ prvek.datum_konce|chytre_datum }}</p>
         </div>
 
         <div class="detail-back">
