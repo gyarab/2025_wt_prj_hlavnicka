@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Prvek, Stitek
 from django import forms
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import Http404, JsonResponse
+from .services import extract_smart_dates # Import tvojí nové logiky
 
 # Create your views here.
 
@@ -22,6 +23,20 @@ def custom_404(request, exception):
 def test_view(request):
     raise Http404("Not found")
 
+
+    
+def parse_dates_in_text(request):
+    original_query = request.GET.get('q', '').strip()
+    
+    if not original_query:
+        return JsonResponse({'success': False, 'error': 'Prázdný dotaz'})
+
+    # Zavoláme naši izolovanou službu
+    result_data = extract_smart_dates(original_query)
+    
+    # Vrátíme výsledek jako JSON
+    return JsonResponse(result_data)
+
 @login_required(login_url='/prihlasit')
 def pridat_prvek(request):
     if request.method == 'POST':
@@ -29,6 +44,23 @@ def pridat_prvek(request):
         if form.is_valid():
             prvek = form.save(commit=False)
             prvek.vlastnik = request.user
+            
+            # Zpracování datumů ze skrytých polí
+            datum_zacatku_str = request.POST.get('datum_zacatku_hidden')
+            datum_konce_str = request.POST.get('datum_konce_hidden')
+            
+            if datum_zacatku_str:
+                try:
+                    prvek.datum_zacatku = datetime.fromisoformat(datum_zacatku_str)
+                except:
+                    pass
+            
+            if datum_konce_str:
+                try:
+                    prvek.datum_konce = datetime.fromisoformat(datum_konce_str)
+                except:
+                    pass
+            
             prvek.save()
             form.save_m2m()  # Uloží many-to-many relationship (stitky)
             return redirect('/home')

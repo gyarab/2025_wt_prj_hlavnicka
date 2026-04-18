@@ -504,3 +504,99 @@ header a{
 .delete-actions .btn-secondary:hover {
     background: #545b62;
 }
+/*--------------------------------------------------------------- AI SLOP -----------------------------------*/
+/* DateTime section styling */
+.datetime-section {
+    background: #f8f9fa !important;
+    border-left: 4px solid var(--primary);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+.datetime-section h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.datetime-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.datetime-field label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.datetime-field input[type="datetime-local"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.datetime-field input[type="datetime-local"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(104, 207, 173, 0.1);
+}
+
+.datetime-field small {
+    color: #666;
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+}
+
+#dates-hints {
+    margin-top: 15px;
+    padding: 12px;
+    background: white;
+    border-radius: 4px;
+    border-left: 2px solid var(--primary);
+    min-height: 20px;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+#dates-hints strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.date-hint {
+    background: #e8f4f8;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-right: 6px;
+    border-bottom: 2px solid var(--primary);
+    font-weight: 500;
+    color: #0066cc;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.date-hint:hover {
+    background: #d4e9f5;
+    cursor: pointer;
+}
+
+.date-highlight {
+    text-decoration: underline wavy #ff9800;
+    cursor: pointer;
+    padding: 2px 0;
+    border-radius: 2px;
+    transition: background-color 0.2s;
+}
+
+.date-highlight:hover {
+    background: #fff3cd;
+    padding: 2px 4px;
+}

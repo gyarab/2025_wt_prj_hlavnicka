@@ -1,1 +1,3 @@
-django 
+django
+dateparser
+python-dateutil 

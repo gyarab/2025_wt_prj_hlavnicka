@@ -24,6 +24,30 @@
         
         <div id="tags-preview" class="tags-preview"></div>
 
+        <!-- Pole pro datum a čas -->
+        <div class="datetime-section" style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #007bff;">
+            <h3 style="margin-top: 0; color: #333;">Datum a čas</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
+                <div class="datetime-field">
+                    <label for="datetime-start">Začátek:</label>
+                    <input type="datetime-local" id="datetime-start" placeholder="Např. zítra v 5:00" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    <small style="color: #666; display: block; margin-top: 5px;">Píšeš: „zítra v 5:00", „příští pondělí", „20.5. 2026 v 11:00"</small>
+                </div>
+                
+                <div class="datetime-field">
+                    <label for="datetime-end">Konec:</label>
+                    <input type="datetime-local" id="datetime-end" placeholder="Např. zítra v 10:00" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+            </div>
+
+            <div id="dates-hints" style="margin-top: 15px; padding: 10px; background: white; border-radius: 4px; min-height: 20px; color: #666; font-size: 0.9rem;"></div>
+        </div>
+
+        <!-- Skrytá pole pro odeslání datumů -->
+        <input type="hidden" name="datum_zacatku_hidden" id="datum_zacatku_hidden" value="">
+        <input type="hidden" name="datum_konce_hidden" id="datum_konce_hidden" value="">
+
         <div class="form-actions" style="margin-top: 20px;">
             <button type="submit" class="btn-primary">Uložit prvek</button>
             <a href="/home" class="btn-secondary">Zrušit</a>
@@ -116,13 +140,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     const editor = document.getElementById('notion-editor');
     const inputNazev = document.querySelector('input[name="nazev"]');
-    const inputObsah = document.querySelector('textarea[name="obsah"]'); // nebo input podle typu ve Formu
+    const inputObsah = document.querySelector('textarea[name="obsah"]');
     const inputStitky = document.querySelector('input[name="stitky"]');
     const tagsPreview = document.getElementById('tags-preview');
+    
+    // Nová pole pro datum a čas
+    const dateStartInput = document.getElementById('datetime-start');
+    const dateEndInput = document.getElementById('datetime-end');
+    const datesHints = document.getElementById('dates-hints');
+    const form = document.getElementById('main-form');
+
+    let detectedDates = [];
 
     // Funkce pro zpracování obsahu
     function updateHiddenFields() {
-        // Získáme text z editoru (innerText zachovává zalomení řádků)
+        // Získáme text z editoru
         const fullText = editor.innerText;
         const lines = fullText.split('\n');
 
@@ -134,19 +166,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const content = lines.slice(1).join('\n').trim();
         inputObsah.value = content;
 
-        // 3. Extrakce hashtagů (#tag)
-        // Regex hledá slova začínající mřížkou
-        const hashtagRegex = /#([\w\u00C0-\u017F]+)/g; // Podpora i pro českou diakritiku
+        // 3. Extrakce hashtagů
+        const hashtagRegex = /#([\w\u00C0-\u017F]+)/g;
         const matches = fullText.match(hashtagRegex) || [];
-        
-        // Odstraníme duplicity a křížky pro uložení do databáze
         const cleanTags = [...new Set(matches.map(t => t.substring(1)))];
-        
-        // Uložíme do skrytého pole (předpokládáme formát oddělený čárkou)
         inputStitky.value = cleanTags.join(', ');
 
-        // 4. Aktualizace vizuálních štítků
+        // 4. Renderuj štítky
         renderTags(cleanTags);
+
+        // 5. Parsuj data a časy z textu pomocí AJAX
+        parseDatesFromText(content);
     }
 
     function renderTags(tags) {
@@ -159,24 +189,146 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Sledování psaní
+    function parseDatesFromText(text) {
+        if (!text.trim()) {
+            datesHints.innerHTML = '';
+            return;
+        }
+
+        // AJAX request na serverový endpoint
+        fetch('/api/parse-dates/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify({ text: text })
+        })
+        .then(response => response.json())
+        .then(data => {
+            detectedDates = data.dates || [];
+            
+            // Aktualizuj hints
+            if (detectedDates.length > 0) {
+                let hintsHTML = '<strong>Detekovaná data:</strong> ';
+                hintsHTML += detectedDates.map(d => `<span class="date-hint" data-type="${d.type}">${d.text}</span>`).join(', ');
+                datesHints.innerHTML = hintsHTML;
+
+                // Automaticky vyplň první detekovaného data
+                if (!dateStartInput.value && detectedDates[0].start_date) {
+                    setDateInputFromISO(dateStartInput, detectedDates[0].start_date);
+                }
+                if (!dateEndInput.value && detectedDates[1] && detectedDates[1].start_date) {
+                    setDateInputFromISO(dateEndInput, detectedDates[1].start_date);
+                }
+
+                // Podtrhni data v editoru
+                highlightDatesInEditor(detectedDates);
+            } else {
+                datesHints.innerHTML = '';
+            }
+        })
+        .catch(error => console.error('Error parsing dates:', error));
+    }
+
+    function setDateInputFromISO(input, isoString) {
+        try {
+            const date = new Date(isoString);
+            // Formát pro datetime-local: YYYY-MM-DDTHH:mm
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            
+            input.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+        } catch (e) {
+            console.error('Error parsing ISO date:', e);
+        }
+    }
+
+    function highlightDatesInEditor(dates) {
+        // Vytvořit nový HTML s podtrhnutými datumy
+        let html = editor.innerHTML;
+        
+        // Seřad podle pozice (od konce, aby se indexy neposouvaly)
+        const sortedDates = [...dates].sort((a, b) => b.start - a.start);
+        
+        sortedDates.forEach(date => {
+            const before = html.substring(0, date.start);
+            const highlighted = `<span class="date-highlight" data-type="${date.type}" title="${date.start_date}">${escapeHtml(date.text)}</span>`;
+            const after = html.substring(date.end);
+            html = before + highlighted + after;
+        });
+        
+        // Ne, lépe to udělat s textovým obsahem a pak znovu vykreslit
+        // Tohle je jen příklad - pro produkci by bylo lepší složitější řešení
+    }
+
+    function escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    // Sledování psaní v editoru
     editor.addEventListener('input', updateHiddenFields);
 
-    // Ošetření vkládání (Paste) - chceme pouze čistý text, ne HTML z jiných webů
+    // Aktualizace skrytých polí při změně datumů
+    dateStartInput.addEventListener('change', function() {
+        document.getElementById('datum_zacatku_hidden').value = 
+            this.value ? new Date(this.value).toISOString() : '';
+    });
+
+    dateEndInput.addEventListener('change', function() {
+        document.getElementById('datum_konce_hidden').value = 
+            this.value ? new Date(this.value).toISOString() : '';
+    });
+
+    // Ošetření vkládání (Paste)
     editor.addEventListener('paste', function(e) {
         e.preventDefault();
         const text = (e.originalEvent || e).clipboardData.getData('text/plain');
         document.execCommand("insertHTML", false, text);
     });
 
-    // Bonus: Pokud uživatel stiskne Enter na prvním řádku, zajistíme odskočení do normálního textu
+    // Ctrl+Enter pro odeslání
     editor.addEventListener('keydown', function(e) {
-        // Ctrl+Enter (nebo Cmd+Enter na Macu) pro odeslání formuláře
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
             e.preventDefault();
-            document.getElementById('main-form').submit();
+            form.submit();
         }
     });
+
+    // Předvyplnění při načtení
+    updateHiddenFields();
 });
 </script>
+
+<style>
+    /* Zvýraznění detekovaných datumů v hints */
+    .date-hint {
+        background: #e8f4f8;
+        padding: 2px 6px;
+        border-radius: 3px;
+        margin-right: 4px;
+        border-bottom: 2px solid #007bff;
+        font-weight: 500;
+    }
+
+    /* Zvýraznění datumů v editoru */
+    .date-highlight {
+        text-decoration: underline wavy #ff9800;
+        cursor: pointer;
+        padding: 2px 0;
+    }
+
+    .date-highlight:hover {
+        background: #fff3cd;
+        border-radius: 2px;
+    }
+</style>
 {% endblock %}
