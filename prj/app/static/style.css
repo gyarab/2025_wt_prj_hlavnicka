@@ -43,7 +43,17 @@ body,html{
     border-radius:20px
 }
 
-
+.preference-floatingHeader main{
+    margin-top:5em !important;
+}
+.preference-floatingHeader header{
+    position:fixed;
+    z-index:100;
+    width:100%;
+    top:0;
+    left:0;
+    right:0;
+}
 header{
     display:flex;
     align-items:center;
@@ -58,7 +68,6 @@ header a{
     color:black;
     text-decoration:underline rgb(63, 42, 2);
     font-weight:500;
-
 }
 
 .vycpavka-hlavicka{
