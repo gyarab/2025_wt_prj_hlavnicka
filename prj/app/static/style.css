@@ -233,6 +233,10 @@ header a{
     margin-top: 2rem;
 }
 
+.prvky-container.velikost-velka {
+    display:block !important;
+}
+
 .prvek-card {/*=========================================================================================================================*/
     background: var(--background-little-accent);
     border: 1px solid #ddd;
@@ -242,6 +246,13 @@ header a{
     transition: box-shadow 0.2s, transform 0.2s;
     display: flex;
     flex-direction: column;
+}
+
+.velikost-velka .prvek-card {
+    width:100%;
+    border-top:4px solid var(--primary);
+    border-left:none;
+    margin-top:2em;
 }
 
 .prvek-header {
@@ -497,12 +508,12 @@ header a{
 }
 
 .delete-actions .btn-secondary {
-    background: #6c757d;
+    background: var(--secondary);
     color: white;
 }
 
 .delete-actions .btn-secondary:hover {
-    background: #545b62;
+    background: var(--secondary-hover);
 }
 /*--------------------------------------------------------------- AI SLOP -----------------------------------*/
 /* DateTime section styling */
@@ -599,4 +610,48 @@ header a{
 .date-highlight:hover {
     background: #fff3cd;
     padding: 2px 4px;
+}
+
+
+
+.dynamic-tag-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tag-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    width: 250px;
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    transition: opacity 0.2s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    font-size: 0.9em;
+}
+
+.dynamic-tag-container:hover .tag-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-list {
+    margin: 8px 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.tag-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
 }

@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Prvek, Stitek
+from .models import Prvek, Stitek, Seznam
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, JsonResponse
 from .services import extract_smart_dates # Import tvojí nové logiky
+from datetime import datetime
 
 # Create your views here.
 
@@ -73,6 +74,7 @@ def pridat_prvek(request):
 def home_view(request):
     if request.user.is_authenticated:
         prvky = Prvek.objects.filter(vlastnik=request.user, smazano=False).order_by('-datum_vytvoreni')
+        seznamy = Seznam.objects.filter(vlastnik=request.user).order_by('nazev')
         
         # Filtrování podle štítku
         stitek_id = request.GET.get('stitek')
@@ -84,8 +86,9 @@ def home_view(request):
     else:
         prvky = []
         stitky = []
+        seznamy = []
     
-    return render(request, "home.html", {"prvky": prvky, "stitky": stitky, "selected_stitek": request.GET.get('stitek')})
+    return render(request, "home.html", {"prvky": prvky, "stitky": stitky, "selected_stitek": request.GET.get('stitek'), "seznamy": seznamy})
 
 def about_view(request):
     return render(request, "about.html")
@@ -155,4 +158,29 @@ def detail_stitku(request,id):
         raise Http404("Štítek nenalezen")
     return render(request, "detailStitku.html", {"stitek": stitek})
 
+def detail_seznamu(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/prihlasit')
+    try:
+        seznam = Seznam.objects.get(id=id)
+        print("Vlastník seznamu",seznam.nazev,":", seznam.vlastnik)
+        if not seznam.vlastnik == request.user and not seznam.vlastnik == None:
+            raise Http404("Seznam nenalezen")
+    except Seznam.DoesNotExist:
+        raise Http404("Seznam nenalezen")
+    return render(request, "detail_seznamu.html", {"seznam": seznam})
 
+
+def stitek_api(request, id):
+    if not request.user.is_authenticated:
+        return JsonResponse({'success': False, 'error': 'Neautorizovaný přístup'}, status=401)
+    
+    try:
+        stitek = Stitek.objects.get(id=id)
+        if not stitek.vlastnik == request.user and not stitek.vlastnik == None:
+            return JsonResponse({'success': False, 'error': 'Štítek nenalezen'}, status=404)
+    except Stitek.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Štítek nenalezen'}, status=404)
+
+    prvky = stitek.prvek_set.filter(smazano=False,vlastnik=request.user).values('id', 'nazev')[:10]  
+    return JsonResponse({'success': True, 'prvky': list(prvky), 'stitek': stitek.nazev, 'stitek_id': stitek.id, 'prvky_count': stitek.prvek_set.filter(smazano=False).count(), 'stitek_vlastnik': stitek.vlastnik.username if stitek.vlastnik else None, 'request_user': request.user.username})

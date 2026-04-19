@@ -1,0 +1,39 @@
+{% load ceske_data %}
+
+{% if prvky %}
+<div class="prvky-container">
+    {% for prvek in prvky %}
+        <div class="prvek-card">
+            <div class="prvek-header">
+                <h3>{{ prvek.nazev }}</h3>
+                <span class="prvek-datum">{{ prvek.datum_vytvoreni|chytre_datum }}</span>
+            </div>
+
+            {% if prvek.obsah %}
+                <p class="prvek-obsah">{{ prvek.obsah|truncatewords:30 }}</p>
+            {% else %}
+                <p class="prvek-obsah empty">Bez obsahu</p>
+            {% endif %}
+
+            {% if prvek.stitky.all %}
+                <div class="prvek-stitky">
+                    {% for stitek in prvek.stitky.all %}
+                        <a href="{% url 'detail_stitku' stitek.id %}" class="stitek" style="background-color: {{ stitek.barva }};">
+                            {{ stitek.nazev }}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="prvek-akce">
+                <a href="{% url 'detail_prvku' prvek.id %}" class="btn-link">Zobrazit</a>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <p>Žádné položky v tomto seznamu.</p>
+    <a href="{% url 'pridat_prvek' %}" class="btn-primary">Přidat položku</a>
+</div>
+{% endif %}

@@ -39,5 +39,7 @@ class Seznam(models.Model):
     stitky_jako_polozky = models.ManyToManyField(Stitek, blank=True, related_name='seznamy_stitku_vseznamu')
     stitky = models.ManyToManyField(Stitek, blank=True, related_name='seznamy_stitku')
 
+    velikostni_typ = models.CharField(max_length=20, choices=[('malý', 'Malý'), ('střední', 'Střední'), ('velký', 'Velký')], default='střední')
+
     def __str__(self):
         return self.nazev

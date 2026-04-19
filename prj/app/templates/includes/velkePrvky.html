@@ -1,0 +1,54 @@
+{% load ceske_data %}
+
+<div class="prvky-container velikost-velka">
+    {% for prvek in prvky %}
+        <div class="prvek-card">
+            <div class="prvek-header">
+                <h3>{{ prvek.nazev }}</h3>
+                <span class="prvek-datum">
+                    {{ prvek.datum_vytvoreni|chytre_datum }}
+                    {% if not prvek.datum_upravy == prvek.datum_vytvoreni %}
+                        <span style="cursor: pointer;text-decoration: underline;" onclick="alert('upraveno {{ prvek.datum_upravy|chytre_datum }}')" class="prvek-upraveno">(upraveno)</span>
+                    {% endif %}
+                </span>
+            </div>
+            {% if prvek.stitky.all %}
+                <div class="prvek-stitky">
+                    {% for stitek in prvek.stitky.all %}
+                        {% include "includes/stitek.html" with tag=stitek %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if prvek.obsah %}
+                <p class="prvek-obsah">{{ prvek.obsah}}</p>
+            {% else %}
+                <p class="prvek-obsah empty">Bez obsahu</p>
+            {% endif %}
+            
+            <hr>
+            <table>
+                
+                <tr>
+                    <td><strong>
+                        {% if not prvek.datum_konce %}
+                        Datum a čas: 
+                        {% else %}
+                        od:
+                        {% endif %}
+                    </strong></td>
+                    <td>{{ prvek.datum_zacatku|chytre_datum }}</td>
+                </tr>
+                {% if prvek.datum_konce %}
+                <tr>
+                    <td><strong>do: </strong></td>
+                    <td>{{ prvek.datum_konce|chytre_datum }}</td>
+                </tr>
+                {% endif %}
+            </table>
+            <div class="prvek-akce">
+                <a href="{% url 'detail_prvku' prvek.id %}" class="btn-link">Zobrazit vše</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

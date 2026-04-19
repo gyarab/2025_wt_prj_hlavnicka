@@ -1,0 +1,15 @@
+<div class="dynamic-tag-container" data-tag-id="{{ tag.id }}">
+    <a href="/stitek/{{ tag.id }}" class="tag-badge stitek" style="background-color: {{ tag.barva|default:'#007bff' }};">
+        {{ tag.nazev }}
+    </a>
+    
+    <div class="tag-tooltip">
+        <div class="tooltip-loader">Načítám podrobnosti...</div>
+        <div class="tooltip-data" style="display: none;">
+            <strong class="tooltip-title"></strong>
+            <ul class="tooltip-list"></ul>
+            <hr>
+            <small class="tooltip-footer"></small>
+        </div>
+    </div>
+</div>
