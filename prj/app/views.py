@@ -187,3 +187,4 @@ def stitek_api(request, id):
 
 def prvek_api(request, id):
     if (not request.user.is_authenticated):
+        pass
