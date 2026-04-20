@@ -18,9 +18,9 @@
             {% if prvek.stitky.all %}
                 <div class="prvek-stitky">
                     {% for stitek in prvek.stitky.all %}
-                        <a href="{% url 'detail_stitku' stitek.id %}" class="stitek" style="background-color: {{ stitek.barva }};">
-                            {{ stitek.nazev }}
-                        </a>
+                         {% include "includes/stitek.html" with tag=stitek %}
+                            
+                        
                     {% endfor %}
                 </div>
             {% endif %}

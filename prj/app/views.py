@@ -184,3 +184,6 @@ def stitek_api(request, id):
 
     prvky = stitek.prvek_set.filter(smazano=False,vlastnik=request.user).values('id', 'nazev')[:10]  
     return JsonResponse({'success': True, 'prvky': list(prvky), 'stitek': stitek.nazev, 'stitek_id': stitek.id, 'prvky_count': stitek.prvek_set.filter(smazano=False).count(), 'stitek_vlastnik': stitek.vlastnik.username if stitek.vlastnik else None, 'request_user': request.user.username})
+
+def prvek_api(request, id):
+    if (not request.user.is_authenticated):
