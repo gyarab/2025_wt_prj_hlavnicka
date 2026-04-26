@@ -1,6 +1,8 @@
 */venv/
+/venv/
 /prj/db.sqlite3/
 */.venv/
+/.venv/
 *.pyc
 __pycache__/
 db.sqlite3

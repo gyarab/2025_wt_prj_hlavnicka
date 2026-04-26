@@ -26,18 +26,6 @@ def test_view(request):
 
 
     
-def parse_dates_in_text(request):
-    original_query = request.GET.get('q', '').strip()
-    
-    if not original_query:
-        return JsonResponse({'success': False, 'error': 'Prázdný dotaz'})
-
-    # Zavoláme naši izolovanou službu
-    result_data = extract_smart_dates(original_query)
-    
-    # Vrátíme výsledek jako JSON
-    return JsonResponse(result_data)
-
 @login_required(login_url='/prihlasit')
 def pridat_prvek(request):
     if request.method == 'POST':
@@ -91,7 +79,9 @@ def home_view(request):
     return render(request, "home.html", {"prvky": prvky, "stitky": stitky, "selected_stitek": request.GET.get('stitek'), "seznamy": seznamy})
 
 def about_view(request):
-    return render(request, "about.html")
+    # Data z prvku #1
+    prvek = Prvek.objects.first()
+    return render(request, "about.html", {"prvek": prvek})
 
 def detail_prvku(request, id):
     if not request.user.is_authenticated:
