@@ -33,12 +33,25 @@ class PrvekSchema(ModelSchema):
         model = PrvekModel
         fields = ["id", "nazev", "obsah", "vlastnik", "datum_zacatku", "datum_konce", "datum_vytvoreni", "datum_upravy"]
 
-class PrvekUpdateSchema(Schema):
+class PrvekCreateSchema(Schema):
+    nazev: str
     obsah: Optional[str] = None
-    nazev: Optional[str] = None
     datum_zacatku: Optional[str] = None
     datum_konce: Optional[str] = None
     stitky: Optional[list[int]] = None
+
+class PrvekUpdateSchema(Schema):
+    nazev: Optional[str] = None
+    obsah: Optional[str] = None
+    datum_zacatku: Optional[str] = None
+    datum_konce: Optional[str] = None
+    stitky: Optional[list[int]] = None
+
+@api.get("/prvek/", response=list[PrvekSchema])
+def list_prvky(request):
+    if request.user.is_anonymous:
+        return []
+    return PrvekModel.objects.filter(smazano=False, vlastnik=request.user)
 
 @api.get("/parse-dates/", response=ParseDatesResponse)
 def parse_dates(request, q:str = ""):
@@ -72,41 +85,55 @@ def delete_prvek(request, id: int):
     except PrvekModel.DoesNotExist:
         raise HttpError(404, "Prvek nebyl nalezen.")
 
-@api.post("/prvek/")
-def create_prvek(request, obsah: str, nazev: str, datum_zacatku: Optional[str] = None, datum_konce: Optional[str] = None, stitky: Optional[list[int]] = None):
-    if(request.user.is_anonymous):
+@api.post("/prvek/", response=PrvekSchema)
+def create_prvek(request, payload: PrvekCreateSchema):
+    if request.user.is_anonymous:
         raise HttpError(403, "Musíte být přihlášen pro vytvoření prvku.")
 
-    prvek = PrvekModel(
-        obsah=obsah,
-        nazev=nazev,
-        datum_zacatku=datum_zacatku,
-        datum_konce=datum_konce,
+    data = payload.dict(exclude_unset=True)
+    stitky_ids = data.pop("stitky", [])
+    
+    prvek = PrvekModel.objects.create(
         vlastnik=request.user,
-        datum_vytvoreni=timezone.now(),
-        datum_upravy=timezone.now(),
-        smazano=False,
-        archivovano=False
-        
+        **data
     )
-    prvek.save()
+    if stitky_ids:
+        prvek.stitky.set(stitky_ids)
+    
     return prvek
+
+@api.put("/prvek/{id}/", response=PrvekSchema)
+def update_prvek_put(request, id: int, payload: PrvekCreateSchema):
+    try:
+        prvek = PrvekModel.objects.get(id=id)
+        if prvek.vlastnik != request.user:
+            raise HttpError(403, "Nemáte oprávnění k úpravě tohoto prvku.")
+        
+        data = payload.dict()
+        stitky_ids = data.pop("stitky") or []
+        
+        for attr, value in data.items():
+            setattr(prvek, attr, value)
+        
+        prvek.stitky.set(stitky_ids)
+        prvek.save()
+        return prvek
+    except PrvekModel.DoesNotExist:
+        raise HttpError(404, "Prvek nebyl nalezen.")
+
 @api.patch("/prvek/{id}/", response=PrvekSchema)
-def update_prvek(request, id: int, payload: PrvekUpdateSchema):
+def update_prvek_patch(request, id: int, payload: PrvekUpdateSchema):
     try:
         prvek = PrvekModel.objects.get(id=id)
 
         if prvek.vlastnik != request.user or prvek.vlastnik is None:
             raise HttpError(403, "Nemáte oprávnění k úpravě tohoto prvku.")
         
-        # payload.dict(exclude_unset=True) vrátí slovník POUZE s klíči, 
-        # které byly reálně odeslány v JSONu. Pokud pošleš jen {"nazev": "Nový"},
-        # vrátí to {'nazev': 'Nový'} a obsah/data ignoruje.
         update_data = payload.dict(exclude_unset=True)
         
         if "stitky" in update_data:
             stitky_ids = update_data.pop("stitky")
-            prvek.stitky.set(stitky_ids)  # Aktualizuje M2M vztah štítků            
+            prvek.stitky.set(stitky_ids)
 
         for attr, value in update_data.items():
             setattr(prvek, attr, value)
@@ -117,6 +144,46 @@ def update_prvek(request, id: int, payload: PrvekUpdateSchema):
         return prvek
     except PrvekModel.DoesNotExist: 
         raise HttpError(404, "Prvek nebyl nalezen.")
+
+# --- Seznam API ---
+from app.models import Seznam as SeznamModel
+
+class SeznamSchema(ModelSchema):
+    class Meta:
+        model = SeznamModel
+        fields = ["id", "nazev", "popis", "vlastnik", "velikostni_typ"]
+
+class SeznamCreateSchema(Schema):
+    nazev: str
+    popis: Optional[str] = None
+    velikostni_typ: str = "střední"
+
+@api.get("/seznam/", response=list[SeznamSchema])
+def list_seznamy(request):
+    if request.user.is_anonymous:
+        return []
+    return SeznamModel.objects.filter(vlastnik=request.user)
+
+@api.get("/seznam/{id}/", response=SeznamSchema)
+def get_seznam(request, id: int):
+    try:
+        seznam = SeznamModel.objects.get(id=id)
+        if seznam.vlastnik != request.user:
+            raise HttpError(403, "Nemáte oprávnění k zobrazení tohoto seznamu.")
+        return seznam
+    except SeznamModel.DoesNotExist:
+        raise HttpError(404, "Seznam nebyl nalezen.")
+
+@api.post("/seznam/", response=SeznamSchema)
+def create_seznam(request, payload: SeznamCreateSchema):
+    if request.user.is_anonymous:
+        raise HttpError(403, "Musíte být přihlášen pro vytvoření seznamu.")
+    
+    seznam = SeznamModel.objects.create(
+        vlastnik=request.user,
+        **payload.dict()
+    )
+    return seznam
 
 @api.get("/stitek/{id}/prvky/", response=list[PrvekSchema])
 def get_prvky_by_stitek(request, id: int):
