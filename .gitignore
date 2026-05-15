@@ -5,3 +5,9 @@
 __pycache__/
 db.sqlite3
 *.log
+
+
+# Zkompilovaný bytecode Pythonu
+*/__pycache__/
+*.py[cod]
+*$py.class
