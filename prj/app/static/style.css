@@ -180,13 +180,16 @@ header a{
     transition: background-color 0.2s;
 }
 
+.btn-better-browser-default {
+}
+
 .btn-primary {
-    background: #007bff;
-    color: white;
+    background: var(--primary);
+    color: var(--text);
 }
 
 .btn-primary:hover {
-    background: #0056b3;
+    background: var(--primary-hover);
 }
 
 .btn-secondary {
@@ -255,6 +258,15 @@ header a{
     transition: box-shadow 0.2s, transform 0.2s;
     display: flex;
     flex-direction: column;
+}
+.seznam-card {
+    background: var(--background-little-accent);
+    border: 1px solid #ddd;
+    border-left:4px solid var(--secondary);
+    border-radius: 4px;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    margin-bottom: 10px;
 }
 
 .velikost-velka .prvek-card {
@@ -334,7 +346,6 @@ header a{
 .empty-state {
     text-align: center;
     padding: 3rem 1rem;
-    background: var(--background-little-accent);
     border-radius: 8px;
     margin-top: 2rem;
 }

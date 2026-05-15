@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrace{% endblock %}
+
+{% block content %}
+<main class="content">
+    <style>
+
+        form  div{
+            margin-bottom: 12px;
+        }
+        .helptext {
+            font-size: 0.8em;
+            color: #666;
+            display:none;
+        }
+        .errorlist {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+        .errorlist li {
+            list-style-type: none;
+        }
+    </style>
+
+    <h1>Registrace</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn btn-primary" type="submit">Registrovat se</button>
+    </form>
+    <p><a href="/prihlasit/">Již máte účet? Přihlaste se</a></p>
+</main>
+{% endblock %}
