@@ -3,5 +3,15 @@
 {% block content %}
     <h1>Detail Štítku</h1>
     <p><span style="background-color: {{ stitek.barva }};display:inline-block;padding:5px;border-radius:20px">{{ stitek.nazev }}</span></p>
+    <h2>Prvky s tímto štítkem:</h2>
+    {% if stitek.prvky.all %}
+        <ul>
+            {% for prvek in stitek.prvky.all %}
+                <li><a href="{% url 'detail_prvku' prvek.id %}">{{ prvek.nazev }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Žádné prvky s tímto štítkem.</p>
+    {% endif %}
     <p>Vlastník: {{ stitek.vlastnik.username }}</p>
 {% endblock %}

@@ -1,0 +1,17 @@
+<ul>
+    {% for prvek in prvky %}
+        <li  style="margin-top:5px;bulet:nnone">
+            <label for="prvek{{ prvek.id }}" >
+                <input type="checkbox" id="prvek{{ prvek.id }}">
+                <a href="{% url 'detail_prvku' prvek.id %}">{{ prvek.nazev|truncatewords:15 }}</a>
+                {% if prvek.stitky.all %}
+                    <span>
+                        {% for stitek in prvek.stitky.all %}
+                            {% include "includes/stitek.html" with tag=stitek %}    
+                        {% endfor %}
+                    </span>
+                {% endif %}
+            </label>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,5 +1,7 @@
+*/venv/
 /venv/
 /prj/db.sqlite3/
+*/.venv/
 /.venv/
 *.pyc
 __pycache__/

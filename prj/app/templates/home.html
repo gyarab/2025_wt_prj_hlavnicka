@@ -1,8 +1,62 @@
 {% extends "base.html" %}
-
+{% load ceske_data %}
 {% block content %}
-    <h1>Home Page</h1>
-    <p>:D</p>
+    <h1>Moje položky</h1>
+    
+    {% if request.user.is_authenticated %}
+        {% if stitky %}
+            <div class="filter-section">
+                <form method="get" class="filter-form">
+                    <label for="stitek-filter">Filtrovat podle štítku:</label>
+                    <select id="stitek-filter" name="stitek" class="filter-select" onchange="this.form.submit()">
+                        <option value="">Všechny položky</option>
+                        {% for stitek in stitky %}
+                            <option value="{{ stitek.id }}" {% if selected_stitek|add:0 == stitek.id %}selected{% endif %}>
+                                {{ stitek.nazev }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+        {% endif %}
+
+        {% if prvky %}
+                    {% include "includes/stredniPrvky.html" with prvky=prvky %}
+        {% else %}
+            <div class="empty-state">
+                {% if selected_stitek %}
+                    <p>Žádné položky s tímto štítkem.</p>
+                    <a href="{% url 'home' %}" class="btn-primary">Zrušit filtr</a>
+                {% else %}
+                    <p>Zatím nemáš žádné položky.</p>
+                    <a href="{% url 'pridat_prvek' %}" class="btn-primary">Vytvořit první položku</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="empty-state">
+            <p>Pro zobrazení svých položek se prosím přihlaš.</p>
+            <a href="{% url 'login' %}" class="btn-primary">Přihlásit se</a>
+        </div>
+    {% endif %}
+
+    <h2>Seznamy</h2>
+    {% if seznamy %}
+        <div class="seznamy-container">
+            {% for seznam in seznamy %}
+                <div class="seznam-card">
+                    <h3>{{ seznam.nazev }}</h3>
+                    <p>{{ seznam.prvky.count }} položek</p>
+                    <a href="{% url 'detail_seznamu' seznam.id %}" class="btn-link">Zobrazit seznam</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>Zatím nemáš žádné seznamy.</p>
+            <a href="/pridatSeznam" class="btn-primary">Vytvořit první seznam</a>
+        </div>
+    {% endif %}
 {% endblock %}
 
-{% block title %}Home Page{% endblock %}
+{% block title %}Moje položky{% endblock %}

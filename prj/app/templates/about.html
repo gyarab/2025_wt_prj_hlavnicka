@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>About Page</h1>
-    <p>:)</p>
+    <h1>{{ prvek.nazev }}</h1>
+    <p>{{ prvek.obsah }}</p>
+    <p>Naposledy upraveno: {{ prvek.upraveno|date:"d.m.Y H:i:s" }}</p>
 {% endblock %}

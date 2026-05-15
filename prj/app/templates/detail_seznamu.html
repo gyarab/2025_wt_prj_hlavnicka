@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ seznam.nazev }} - Detail seznamu{% endblock %}
+
+{% block content %}
+    <h1>{{ seznam.nazev }}</h1>
+    <p>{{ seznam.popis|default:"Žádný popis" }}</p>
+
+    {% if seznam.velikostni_typ == "malý" %}
+        {% include "includes/malePrvky.html" with prvky=seznam.prvky.all %}
+    {% elif seznam.velikostni_typ == "velký" %}
+        {% include "includes/velkePrvky.html" with prvky=seznam.prvky.all %}
+    {% else %}
+        {% include "includes/stredniPrvky.html" with prvky=seznam.prvky.all %}
+    {% endif %}
+
+{% endblock %}
