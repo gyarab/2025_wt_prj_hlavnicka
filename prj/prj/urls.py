@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path
 
 from django.conf.urls import handler404
-from app.views import custom_404, test_view, home_view, about_view, detail_prvku, detail_stitku, pridat_prvek, upravit_prvek, smazat_prvek, detail_seznamu, stitek_api, registrace_view
+from app.views import custom_404, test_view, home_view, about_view, detail_prvku, detail_stitku, pridat_prvek, upravit_prvek, smazat_prvek, detail_seznamu, stitek_api, registrace_view, api_playground_view
 from django.contrib.auth import views as auth_views 
 
 from .api import api
@@ -46,4 +46,5 @@ urlpatterns = [
     path("api/stitek/<int:id>/", stitek_api, name="stitek_prvky_api"),
 
     path("api/", api.urls),
+    path("api_playground/", api_playground_view, name="api_playground"),
 ]

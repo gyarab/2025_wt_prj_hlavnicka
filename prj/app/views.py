@@ -189,3 +189,7 @@ def stitek_api(request, id):
 def prvek_api(request, id):
     if (not request.user.is_authenticated):
         pass
+
+
+def api_playground_view(request):
+    return render(request, "api_playground.html")
