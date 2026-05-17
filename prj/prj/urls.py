@@ -22,7 +22,7 @@ from django.conf.urls import handler404
 from app.views import custom_404, test_view, home_view, about_view, detail_prvku, detail_stitku, pridat_prvek, upravit_prvek, smazat_prvek, detail_seznamu, stitek_api
 from django.contrib.auth import views as auth_views 
 
-from .api import api
+from app.api import api
 
 
 handler404 = custom_404
