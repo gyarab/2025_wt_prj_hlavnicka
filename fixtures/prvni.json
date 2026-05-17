@@ -216,7 +216,8 @@
           "vlastnik": 2,
           "prvky": [1, 2, 3, 4],
           "podseznamy": [2],
-          "stitky": [10]
+          "stitky": [10],
+          "velikostni_typ": "střední"
         }
       },
       {
@@ -228,7 +229,8 @@
           "vlastnik": 2,
           "prvky": [2],
           "podseznamy": [],
-          "stitky_jako_polozky": [1]
+          "stitky_jako_polozky": [1],
+          "velikostni_typ": "střední"
         }
       },
       {
@@ -240,7 +242,8 @@
           "vlastnik": 2,
           "prvky": [5, 6, 7],
           "podseznamy": [],
-          "stitky": [11]
+          "stitky": [11],
+          "velikostni_typ": "malý"
         }
       },
       {
@@ -251,7 +254,8 @@
           "popis": "Z\u00e1znamy, kter\u00e9 vid\u00ed i anonymn\u00ed u\u017eivatel.",
           "vlastnik": 1,
           "prvky": [4],
-          "stitky": [2]
+          "stitky": [2],
+          "velikostni_typ": "malý"
         }
       },
 
@@ -382,7 +386,8 @@
           "vlastnik": 2,
           "prvky": [10, 11, 12],
           "podseznamy": [],
-          "stitky": [10]
+          "stitky": [10],
+          "velikostni_typ": "střední"
         }
       },
       {
@@ -394,7 +399,8 @@
           "vlastnik": 2,
           "prvky": [4, 13, 14],
           "podseznamy": [],
-          "stitky": [4]
+          "stitky": [4],
+          "velikostni_typ": "velký"
         }
       }
     ]

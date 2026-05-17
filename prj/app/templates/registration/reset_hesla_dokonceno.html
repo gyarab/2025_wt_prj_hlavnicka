@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Heslo resetováno{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Heslo bylo úspěšně nastaveno</h2>
+    <p>Nyní se můžete přihlásit pomocí svého nového hesla.</p>
+    <a href="{% url 'login' %}" class="btn-better-browser-default">Přihlásit se</a>
+</div>
+{% endblock %}

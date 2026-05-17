@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Změna hesla{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Změna hesla</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-better-browser-default">Změnit heslo</button>
+    </form>
+</div>
+{% endblock %}

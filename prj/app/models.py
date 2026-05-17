@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 # Create your models here.
 
 
@@ -8,6 +9,9 @@ class Stitek(models.Model):
     barva = models.CharField(max_length=7)  # Hex kód barvy
     specialni_vyznam = models.CharField(max_length=255, null=True, blank=True)
     vlastnik = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('detail_stitku', args=[self.id])
 
     def __str__(self):
         return self.nazev
@@ -26,6 +30,9 @@ class Prvek(models.Model):
 
     souvisejici_prvky = models.ManyToManyField('self', blank=True)
 
+    def get_absolute_url(self):
+        return reverse('detail_prvku', args=[self.id])
+
     def __str__(self):
         return f"{self.nazev}, ({self.vlastnik.username}){' [X]' if self.smazano else ''}"
 
@@ -40,6 +47,9 @@ class Seznam(models.Model):
     stitky = models.ManyToManyField(Stitek, blank=True, related_name='seznamy_stitku')
 
     velikostni_typ = models.CharField(max_length=20, choices=[('malý', 'Malý'), ('střední', 'Střední'), ('velký', 'Velký')], default='střední')
+
+    def get_absolute_url(self):
+        return reverse('detail_seznamu', args=[self.id])
 
     def __str__(self):
         return self.nazev

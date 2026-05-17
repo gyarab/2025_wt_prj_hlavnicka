@@ -1,0 +1,306 @@
+- model: app.stitek
+  pk: 20
+  fields:
+    nazev: "Projektový"
+    barva: "#008080"
+    specialni_vyznam: null
+    vlastnik: 1
+
+- model: app.stitek
+  pk: 21
+  fields:
+    nazev: "Rozpracováno"
+    barva: "#FFA07A"
+    specialni_vyznam: null
+    vlastnik: 2
+
+- model: app.stitek
+  pk: 22
+  fields:
+    nazev: "Kritické"
+    barva: "#8B0000"
+    specialni_vyznam: null
+    vlastnik: 2
+
+- model: app.stitek
+  pk: 23
+  fields:
+    nazev: "Nápad"
+    barva: "#90EE90"
+    specialni_vyznam: null
+    vlastnik: 3
+
+- model: app.stitek
+  pk: 24
+  fields:
+    nazev: "K revizi"
+    barva: "#FFD700"
+    specialni_vyznam: null
+    vlastnik: 2
+
+- model: app.prvek
+  pk: 20
+  fields:
+    nazev: "Návrh UI pro novou verzi"
+    obsah: "Předělat dashboard a přidat podporu pro tmavý režim."
+    stitky: [20, 21]
+    vlastnik: 2
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-10T14:00:00Z"
+    datum_upravy: "2026-05-11T10:30:00Z"
+    souvisejici_prvky: [1, 10]
+
+- model: app.prvek
+  pk: 21
+  fields:
+    nazev: "Uživatelské testování"
+    obsah: "Sběr zpětné vazby od prvních 10 testerů."
+    stitky: [20]
+    vlastnik: 3
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-12T09:00:00Z"
+    datum_upravy: "2026-05-12T09:00:00Z"
+    souvisejici_prvky: [20]
+
+- model: app.prvek
+  pk: 22
+  fields:
+    nazev: "Oprava kritické chyby v API"
+    obsah: "Endpoint /api/v1/sync vrací 500 při velkém payloadu."
+    stitky: [22, 1]
+    vlastnik: 2
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-15T16:20:00Z"
+    datum_upravy: "2026-05-15T18:00:00Z"
+
+- model: app.prvek
+  pk: 23
+  fields:
+    nazev: "Refaktoring databáze"
+    obsah: "Optimalizace indexů pro tabulku Prvek."
+    stitky: [21, 10]
+    vlastnik: 2
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-16T11:00:00Z"
+    datum_upravy: "2026-05-16T11:00:00Z"
+    souvisejici_prvky: [22]
+
+- model: app.prvek
+  pk: 24
+  fields:
+    nazev: "Příprava marketingové kampaně"
+    obsah: "Vytvořit grafiku pro sociální sítě."
+    stitky: [23]
+    vlastnik: 3
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-17T08:30:00Z"
+    datum_upravy: "2026-05-17T08:30:00Z"
+
+- model: app.prvek
+  pk: 25
+  fields:
+    nazev: "Analýza konkurence"
+    obsah: "Srovnání funkcí s nástroji Notion a Trello."
+    stitky: [20]
+    vlastnik: 2
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-17T10:00:00Z"
+    datum_upravy: "2026-05-17T10:00:00Z"
+
+- model: app.prvek
+  pk: 26
+  fields:
+    nazev: "Implementace exportu do PDF"
+    obsah: "Umožnit uživatelům stáhnout si seznam jako dokument."
+    stitky: [21, 24]
+    vlastnik: 2
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-17T11:00:00Z"
+    datum_upravy: "2026-05-17T11:00:00Z"
+
+- model: app.prvek
+  pk: 27
+  fields:
+    nazev: "Zálohování dat"
+    obsah: "Nastavit automatické snapshoty DB každých 24h."
+    stitky: [20]
+    vlastnik: 1
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-17T12:00:00Z"
+    datum_upravy: "2026-05-17T12:00:00Z"
+
+- model: app.prvek
+  pk: 28
+  fields:
+    nazev: "Úprava obchodních podmínek"
+    obsah: "Právní revize textu pro rok 2026."
+    stitky: [24]
+    vlastnik: 1
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-17T13:00:00Z"
+    datum_upravy: "2026-05-17T13:00:00Z"
+
+- model: app.prvek
+  pk: 29
+  fields:
+    nazev: "Testování na mobilních zařízeních"
+    obsah: "iOS Safari vykazuje chyby v renderování gridu."
+    stitky: [22, 21]
+    vlastnik: 2
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-17T14:00:00Z"
+    datum_upravy: "2026-05-17T14:00:00Z"
+
+- model: app.seznam
+  pk: 20
+  fields:
+    nazev: "Velký projektový přehled"
+    popis: "Komplexní seznam všeho, co souvisí s novým UI a testováním."
+    vlastnik: 2
+    prvky: [20, 21, 22, 23, 25, 26, 29]
+    podseznamy: [21, 23]
+    stitky_jako_polozky: []
+    stitky: [20]
+    velikostni_typ: "velký"
+
+- model: app.seznam
+  pk: 21
+  fields:
+    nazev: "Dílčí úkoly UI"
+    popis: "Detailní kroky pro implementaci designu."
+    vlastnik: 2
+    prvky: [20, 29]
+    podseznamy: []
+    stitky_jako_polozky: [21]
+    stitky: [21]
+    velikostni_typ: "střední"
+
+- model: app.seznam
+  pk: 22
+  fields:
+    nazev: "Rychlé poznámky Petr"
+    popis: "Petrův pracovní prostor pro rychlé nápady."
+    vlastnik: 3
+    prvky: [21, 24]
+    podseznamy: []
+    stitky_jako_polozky: [5, 6, 23]
+    stitky: []
+    velikostni_typ: "malý"
+
+- model: app.seznam
+  pk: 23
+  fields:
+    nazev: "Technický dluh a Bugy"
+    popis: "Seznam věcí, které nás pálí a je třeba je vyřešit."
+    vlastnik: 2
+    prvky: [22, 23, 29]
+    podseznamy: []
+    stitky_jako_polozky: [1, 22]
+    stitky: [22]
+    velikostni_typ: "střední"
+
+- model: app.seznam
+  pk: 24
+  fields:
+    nazev: "Administrativa"
+    popis: "Právní a systémové věci."
+    vlastnik: 1
+    prvky: [27, 28]
+    podseznamy: []
+    stitky_jako_polozky: [24]
+    stitky: []
+    velikostni_typ: "malý"
+
+- model: app.seznam
+  pk: 25
+  fields:
+    nazev: "Marketing a Vize"
+    popis: "Kam směřujeme a jak to prodat."
+    vlastnik: 3
+    prvky: [24, 25]
+    podseznamy: []
+    stitky_jako_polozky: [23]
+    stitky: [23]
+    velikostni_typ: "střední"
+
+- model: app.seznam
+  pk: 26
+  fields:
+    nazev: "Vnořený test 1"
+    popis: "Test hlubokého vnoření"
+    vlastnik: 2
+    prvky: [1, 2]
+    podseznamy: [27]
+    stitky_jako_polozky: []
+    stitky: []
+    velikostni_typ: "malý"
+
+- model: app.seznam
+  pk: 27
+  fields:
+    nazev: "Vnořený test 2"
+    popis: "Druhá úroveň vnoření"
+    vlastnik: 2
+    prvky: [3]
+    podseznamy: [28]
+    stitky_jako_polozky: []
+    stitky: []
+    velikostni_typ: "malý"
+
+- model: app.seznam
+  pk: 28
+  fields:
+    nazev: "Vnořený test 3"
+    popis: "Třetí úroveň vnoření - list"
+    vlastnik: 2
+    prvky: [4]
+    podseznamy: []
+    stitky_jako_polozky: []
+    stitky: []
+    velikostni_typ: "malý"
+
+- model: app.prvek
+  pk: 30
+  fields:
+    nazev: "Dlouhý text pro testování layoutu"
+    obsah: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. \n\n Další odstavec: \n Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+    stitky: [2, 10]
+    vlastnik: 2
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-17T15:00:00Z"
+    datum_upravy: "2026-05-17T15:00:00Z"
+
+- model: app.prvek
+  pk: 31
+  fields:
+    nazev: "Úkol s mnoha štítky"
+    obsah: "Testování zobrazení štítků v detailu."
+    stitky: [1, 2, 3, 4, 5, 6, 10, 11, 20, 21, 22, 23, 24]
+    vlastnik: 2
+    smazano: false
+    archivovano: false
+    datum_vytvoreni: "2026-05-17T15:30:00Z"
+    datum_upravy: "2026-05-17T15:30:00Z"
+
+- model: app.seznam
+  pk: 30
+  fields:
+    nazev: "Layout Test Seznam"
+    popis: "Seznam pro testování dlouhých textů a mnoha štítků."
+    vlastnik: 2
+    prvky: [30, 31]
+    podseznamy: []
+    stitky_jako_polozky: [1, 2, 3, 4, 5, 6]
+    stitky: [20, 21, 22, 23, 24]
+    velikostni_typ: "velký"

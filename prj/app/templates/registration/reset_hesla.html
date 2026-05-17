@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Reset hesla{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Reset hesla</h2>
+    <p>Zadejte svou e-mailovou adresu a my vám zašleme instrukce k nastavení nového hesla.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-better-browser-default">Odeslat e-mail</button>
+    </form>
+</div>
+{% endblock %}

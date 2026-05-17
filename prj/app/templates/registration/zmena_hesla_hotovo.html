@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Heslo změněno{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Změna hesla proběhla úspěšně</h2>
+    <p>Vaše heslo bylo úspěšně změněno.</p>
+    <a href="{% url 'home' %}" class="btn-better-browser-default">Zpět na hlavní stránku</a>
+</div>
+{% endblock %}

@@ -9,7 +9,7 @@ from ninja.errors import HttpError
 from app.templatetags.ceske_data import chytre_datum  
 from django.utils import timezone
 
-api = NinjaAPI(title="Aplikace API", version="1.0.0")
+api = NinjaAPI(title="Contextum API", version="1.0.0")
 
 class ParseDatesResponse(Schema):
     success: bool
