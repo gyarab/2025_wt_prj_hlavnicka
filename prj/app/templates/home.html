@@ -47,8 +47,14 @@
                 <div class="seznam-card">
                     <h3>{{ seznam.nazev }}</h3>
                     <p>{{ seznam.prvky.count }} položek</p>
-                    <a href="{% url 'detail_seznamu' seznam.id %}" class="btn-link">Zobrazit seznam</a>
+                <div>
+                    {% include "includes/malePrvky.html" with prvky=seznam.prvky.all %}
                 </div>
+                    <a href="{% url 'detail_seznamu' seznam.id %}" class="btn-link">Zobrazit seznam</a>
+                    
+
+                </div>
+                
             {% endfor %}
         </div>
     {% else %}

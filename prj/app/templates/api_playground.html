@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>API hřiště</h1>
+    <input type="number" name="prvekInput" id="prvekInput">
+    <button id="sendRequest">Odeslat požadavek</button>
+    <button id="clearResponse">Vymazat odpověď</button>
+    <div>
+        <pre  style="white-space: pre-wrap;" id="responseContainer">
+        </pre>
+    </div>
+    <script>
+        document.getElementById("sendRequest").addEventListener("click", function() {
+            const prvekId = document.getElementById("prvekInput").value;
+            fetch(`/api/prvek/${prvekId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("responseContainer").innerText = JSON.stringify(data);
+                });
+        });
+
+        document.getElementById("clearResponse").addEventListener("click", function() {
+            document.getElementById("responseContainer").innerText = "";
+        });
+    </script>
+{% endblock %}

@@ -1,5 +1,6 @@
 from ninja import NinjaAPI, Schema, ModelSchema  # Přidán import ModelSchema
 from ninja.responses import Response
+from ninja.security import django_auth
 from app.services import extract_smart_dates
 from typing import Optional, Any
 from app.models import Prvek as PrvekModel  
@@ -8,7 +9,7 @@ from ninja.errors import HttpError
 from app.templatetags.ceske_data import chytre_datum  
 from django.utils import timezone
 
-api = NinjaAPI()
+api = NinjaAPI(title="Aplikace API", version="1.0.0")
 
 class ParseDatesResponse(Schema):
     success: bool
@@ -47,7 +48,7 @@ class PrvekUpdateSchema(Schema):
     datum_konce: Optional[str] = None
     stitky: Optional[list[int]] = None
 
-@api.get("/prvek/", response=list[PrvekSchema])
+@api.get("/prvek/", response=list[PrvekSchema], auth=django_auth)
 def list_prvky(request):
     if request.user.is_anonymous:
         return []
@@ -61,7 +62,7 @@ def parse_dates(request, q:str = ""):
     result_data = extract_smart_dates(q)
     return result_data
 
-@api.get("/prvek/{id}/", response=PrvekSchema)
+@api.get("/prvek/{id}/", response=PrvekSchema, auth=django_auth)
 def get_prvek(request, id: int):
     try:
         prvek = PrvekModel.objects.get(id=id)
@@ -73,7 +74,7 @@ def get_prvek(request, id: int):
     except PrvekModel.DoesNotExist:
         raise HttpError(404, "Prvek nebyl nalezen.")
 
-@api.delete("/prvek/{id}/")
+@api.delete("/prvek/{id}/", auth=django_auth)
 def delete_prvek(request, id: int):
     try:
         prvek = PrvekModel.objects.get(id=id)
@@ -85,7 +86,7 @@ def delete_prvek(request, id: int):
     except PrvekModel.DoesNotExist:
         raise HttpError(404, "Prvek nebyl nalezen.")
 
-@api.post("/prvek/", response=PrvekSchema)
+@api.post("/prvek/", response=PrvekSchema, auth=django_auth)
 def create_prvek(request, payload: PrvekCreateSchema):
     if request.user.is_anonymous:
         raise HttpError(403, "Musíte být přihlášen pro vytvoření prvku.")
@@ -102,7 +103,7 @@ def create_prvek(request, payload: PrvekCreateSchema):
     
     return prvek
 
-@api.put("/prvek/{id}/", response=PrvekSchema)
+@api.put("/prvek/{id}/", response=PrvekSchema, auth=django_auth)
 def update_prvek_put(request, id: int, payload: PrvekCreateSchema):
     try:
         prvek = PrvekModel.objects.get(id=id)
@@ -121,7 +122,7 @@ def update_prvek_put(request, id: int, payload: PrvekCreateSchema):
     except PrvekModel.DoesNotExist:
         raise HttpError(404, "Prvek nebyl nalezen.")
 
-@api.patch("/prvek/{id}/", response=PrvekSchema)
+@api.patch("/prvek/{id}/", response=PrvekSchema, auth=django_auth)
 def update_prvek_patch(request, id: int, payload: PrvekUpdateSchema):
     try:
         prvek = PrvekModel.objects.get(id=id)
@@ -158,13 +159,13 @@ class SeznamCreateSchema(Schema):
     popis: Optional[str] = None
     velikostni_typ: str = "střední"
 
-@api.get("/seznam/", response=list[SeznamSchema])
+@api.get("/seznam/", response=list[SeznamSchema], auth=django_auth)
 def list_seznamy(request):
     if request.user.is_anonymous:
         return []
     return SeznamModel.objects.filter(vlastnik=request.user)
 
-@api.get("/seznam/{id}/", response=SeznamSchema)
+@api.get("/seznam/{id}/", response=SeznamSchema, auth=django_auth)
 def get_seznam(request, id: int):
     try:
         seznam = SeznamModel.objects.get(id=id)
@@ -174,7 +175,7 @@ def get_seznam(request, id: int):
     except SeznamModel.DoesNotExist:
         raise HttpError(404, "Seznam nebyl nalezen.")
 
-@api.post("/seznam/", response=SeznamSchema)
+@api.post("/seznam/", response=SeznamSchema, auth=django_auth)
 def create_seznam(request, payload: SeznamCreateSchema):
     if request.user.is_anonymous:
         raise HttpError(403, "Musíte být přihlášen pro vytvoření seznamu.")
@@ -185,7 +186,7 @@ def create_seznam(request, payload: SeznamCreateSchema):
     )
     return seznam
 
-@api.get("/stitek/{id}/prvky/", response=list[PrvekSchema])
+@api.get("/stitek/{id}/prvky/", response=list[PrvekSchema], auth=django_auth)
 def get_prvky_by_stitek(request, id: int):
     try:
         stitek = StitekModel.objects.get(id=id)
@@ -199,7 +200,7 @@ def get_prvky_by_stitek(request, id: int):
     except StitekModel.DoesNotExist:
         raise HttpError(404, "Štítek nebyl nalezen.")
 
-@api.get("/stitek/{id}/", response=StitekSchema)
+@api.get("/stitek/{id}/", response=StitekSchema, auth=django_auth)
 def get_stitek(request, id: int):
     try:
         stitek = StitekModel.objects.get(id=id)

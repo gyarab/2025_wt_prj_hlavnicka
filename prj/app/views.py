@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Prvek, Stitek, Seznam
 from django import forms
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.http import Http404, JsonResponse
 from .services import extract_smart_dates # Import tvojí nové logiky
 from datetime import datetime
@@ -23,6 +24,16 @@ def custom_404(request, exception):
 
 def test_view(request):
     raise Http404("Not found")
+
+def registrace_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/prihlasit/')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/registrace.html', {'form': form})
 
 
     
@@ -178,3 +189,7 @@ def stitek_api(request, id):
 def prvek_api(request, id):
     if (not request.user.is_authenticated):
         pass
+
+
+def api_playground_view(request):
+    return render(request, "api_playground.html")
