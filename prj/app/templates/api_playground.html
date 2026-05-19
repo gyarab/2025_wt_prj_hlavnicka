@@ -1,25 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>API hřiště</h1>
+    <p>Ideální místo na vyzkoušení API endpointů (Doopravdy vůbec, lepší je <a href="/api/docs">ninja</a>).</p>
+    <label for="radio-prvek"><input type="radio" id="radio-prvek" name="apiOption" value="prvek" checked>Prvek</label>
+    <label for="radio-seznam"><input type="radio" id="radio-seznam" name="apiOption" value="seznam">Seznam</label>
+    <label for="radio-stitek"><input type="radio" id="radio-stitek" name="apiOption" value="stitek">Stitek</label>
+    <br>
     <input type="number" name="prvekInput" id="prvekInput">
     <button id="sendRequest">Odeslat požadavek</button>
     <button id="clearResponse">Vymazat odpověď</button>
     <div>
+        <h2>Odpověď v JSON:</h2>
         <pre  style="white-space: pre-wrap;" id="responseContainer">
         </pre>
+        
     </div>
     <script>
         document.getElementById("sendRequest").addEventListener("click", function() {
             const prvekId = document.getElementById("prvekInput").value;
-            fetch(`/api/prvek/${prvekId}/`)
+            const apiOption = document.querySelector('input[name="apiOption"]:checked').value;
+            fetch(`/api/${apiOption}/${prvekId}/`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById("responseContainer").innerText = JSON.stringify(data);
+                    document.getElementById("responseContainer").innerText = JSON.stringify(data, null, 2); // Aby se to sformátovalo.
+                    document.getElementById("responseContainer").style.color = "black";
+                })
+                .catch(error => {
+                    document.getElementById("responseContainer").innerText = "Chyba: " + error;
+                    document.getElementById("responseContainer").style.color = "red";
                 });
         });
 
         document.getElementById("clearResponse").addEventListener("click", function() {
             document.getElementById("responseContainer").innerText = "";
+            document.getElementById("responseContainer").style.color = "black";
         });
     </script>
 {% endblock %}
