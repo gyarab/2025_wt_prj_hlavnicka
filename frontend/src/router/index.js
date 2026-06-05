@@ -12,6 +12,16 @@ const routes = [
         path: "/prvek/:id",
         name: "detailPrvku",
         component: PrvekDetail
+    },
+    {
+        path: "/:catchAll(.*)",
+        name: "notFound",
+        component: () => import("../views/NotFound.vue")
+    },
+    {
+        path: "/prvek/novy",
+        name: "novyPrvek",
+        component: () => import("../views/NovyPrvek.vue")
     }
 ];
 

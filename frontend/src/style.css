@@ -1,6 +1,74 @@
-body{
+main{
     font-family: sans-serif;
     max-width: 800px;
     margin: 0 auto;
     padding: 16px;
+}
+
+body{
+    font-family: sans-serif;
+    padding:0;
+}
+
+
+:root{
+    --primary:rgb(104, 207, 173);  
+    --primary-hover:rgb(82, 184, 152);
+    --primary-active:rgb(62, 148, 122);
+
+    --secondary: #34495E;
+    --secondary-hover: #2C3E50;
+    --secondary-active: #1A242F;
+
+    --danger:#FF8E72;
+
+    --background:#F7FBF9;
+    --background-little-accent:#f2f8f5;
+    --background-accent:#E0F2F1;
+
+    --text:black;
+    --text-unimportant:rgb(120, 120, 120);
+
+}
+
+body,html{
+    margin:0;
+    padding:0;
+    background-color: var(--background);
+}
+
+
+
+header{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    background-color: rgb(104, 207, 173);
+    padding:10px;
+    margin:0;
+    border-bottom: 2px solid darkgreen;
+}
+
+header a{
+    color:black;
+    text-decoration:underline rgb(63, 42, 2);
+    font-weight:500;
+}
+
+.vycpavka-hlavicka{
+    flex-grow:1;
+}
+
+.prava-strana-hlavicka{
+    justify-content:flex-end;
+    display:flex;
+    align-items:center;
+    flex:1;
+    gap:1em;
+}
+
+header h1{
+    margin:0;
+    font-size:1.5em;
+    padding:5px;
 }
