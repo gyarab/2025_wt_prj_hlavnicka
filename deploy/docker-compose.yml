@@ -10,6 +10,8 @@
 #   frontend – nginx = vstupní brána: servíruje Vue SPA (/app/), statiku (/static/),
 #              média (/media/) a zbytek proxuje na `web`. Provoz zvenčí na něj pouští
 #              traefik (HTTPS) přes sdílenou síť `proxy` podle domény ${APP_HOST}.
+name: contextum
+
 services:
   web:
     build:
