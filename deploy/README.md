@@ -1,7 +1,7 @@
 # Nasazení Contextum (deployment)
 
 Tahle složka přidává **nasazení aplikace na reálný server** — aplikace běží na
-**https://hlavnicka.gawt.dtcloud.cz**. Navazuje na lekci o Dockeru: aplikaci zabalíme do
+**https://contextum.honzaa.cz**. Navazuje na lekci o Dockeru: aplikaci zabalíme do
 kontejnerů a pošleme ji na server přes **Ansible**, celé to spouští **GitHub Actions**
 a provoz zvenčí na ni pouští **traefik** (reverzní proxy na serveru).
 
@@ -11,11 +11,11 @@ a provoz zvenčí na ni pouští **traefik** (reverzní proxy na serveru).
 ## Jak to vypadá na serveru
 
 ```
-                       ┌──────────────────── server gawt.dtcloud.cz ───────────────────────┐
-                       │  traefik  (HTTPS / Let's Encrypt, síť `proxy`)                    │
- návštěvník ──HTTPS──► │     │  Host(hlavnicka.gawt.dtcloud.cz)                            │
-                       │     ▼                                                             │
-                       │  frontend (nginx)                                                 │
+                       ┌──────────────────── server contextum.honzaa.cz ───────────────────┐
+                        │  traefik  (HTTPS / Let's Encrypt, síť `proxy`)                    │
+  návštěvník ──HTTPS──► │     │  Host(contextum.honzaa.cz)                                  │
+                        │     ▼                                                             │
+                        │  frontend (nginx)                                                 │
                        │    /app/     →  Vue SPA (build z frontend/)                       │
                        │    /static/  →  statika Djanga   (volume static_data)             │
                        │    /media/   →  média            (volume media_data)              │
@@ -104,7 +104,7 @@ docker compose --env-file config/production.env -f docker-compose.yml logs -f we
 - Běžící **traefik** se sdílenou externí sítí **`proxy`** (entrypoint `websecure`,
   certresolver `letsencrypt` — názvy uprav v `production.env`, pokud má platforma jiné).
   Síť musí existovat předem: `docker network create proxy`.
-- **DNS** pro `hlavnicka.gawt.dtcloud.cz` míří na server (aby traefik dostal Let's Encrypt cert).
+- **DNS** pro `contextum.honzaa.cz` míří na server (aby traefik dostal Let's Encrypt cert).
 
 ## Jak nasazení probíhá (krok za krokem)
 
@@ -134,7 +134,7 @@ Od `git push` po běžící web — co dělá GitHub Actions a co docker compose
    - **`frontend`** (nginx) servíruje Vue SPA (`/app/`), statiku a média a zbytek
      proxuje na `web`.
 5. **traefik** si všimne štítků na kontejneru `frontend`, vystaví pro
-   `hlavnicka.gawt.dtcloud.cz` HTTPS certifikát (Let's Encrypt) a začne na nginx posílat
+   `contextum.honzaa.cz` HTTPS certifikát (Let's Encrypt) a začne na nginx posílat
    provoz. Web je živý.
 
 Celé je to **idempotentní**: další push znovu postaví image a přepne kontejnery na

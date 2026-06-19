@@ -1,4 +1,4 @@
-# Nasazení Contextum (hlavnicka.gawt.dtcloud.cz) na server přes Ansible.
+# Nasazení Contextum (contextum.honzaa.cz) na server přes Ansible.
 #
 # Spouští se:
 #   - automaticky při pushi do `main`
