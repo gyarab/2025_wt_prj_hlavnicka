@@ -3,3 +3,6 @@ dateparser
 python-dateutil 
 django-ninja
 PyYAML
+
+# WSGI server pro produkci (lokálně stačí `./manage.py runserver`).
+gunicorn
