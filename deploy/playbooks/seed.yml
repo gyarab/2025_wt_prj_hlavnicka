@@ -27,7 +27,7 @@
           - --noinput
 
     # Jedno volání loaddata s globem, ať Django vyřeší cizí klíče mezi soubory
-    # v jedné transakci (stejně jako lokální `loaddata ../fixtures/*.yaml`).
+    # v jedné transakci (stejně jako lokální `loaddata ../fixtures/*.json`).
     - name: Load fixtures
       community.docker.docker_compose_v2_exec:
         project_src: "{{ project_dir }}/deploy"
@@ -39,7 +39,7 @@
         argv:
           - bash
           - -c
-          - "python manage.py loaddata /app/fixtures/*.yaml"
+          - "python manage.py loaddata /app/fixtures/*.json"
       register: loaddata_result
 
     - name: Show loaddata output

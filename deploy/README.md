@@ -87,7 +87,7 @@ Co playbooky dělají:
   stav, pošle ho na server do `project_dir`, tam `docker compose up -d --build`.
   Migrace a collectstatic doběhnou z entrypointu kontejneru.
 - [playbooks/seed.yml](playbooks/seed.yml) — `manage.py flush` + `loaddata
-  /app/fixtures/*.yaml` uvnitř kontejneru `web` (fixtures jsou zabalené v image).
+  /app/fixtures/*.json` uvnitř kontejneru `web` (fixtures jsou zabalené v image).
 
 ## Spustit celý stack přímo na serveru (debug)
 
