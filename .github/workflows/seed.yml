@@ -1,4 +1,4 @@
-# Naplnění databáze FilmDB ukázkovými daty z fixtures/ — SAMOSTATNÝ, jen ruční workflow.
+# Naplnění databáze Contextum ukázkovými daty z fixtures/ — SAMOSTATNÝ, jen ruční workflow.
 #
 # POZOR: napřed databázi VYPRÁZDNÍ (flush) a pak nahraje fixtures (loaddata). Proto je
 # oddělený od deploye a chce potvrzení. Předpokládá, že stack už běží (deploy proběhl).

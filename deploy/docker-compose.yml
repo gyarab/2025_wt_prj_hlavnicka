@@ -1,4 +1,4 @@
-# Nasazovací (deployment) stack pro FilmDB — pro server gawt.dtcloud.cz, NE pro lokální vývoj.
+# Nasazovací (deployment) stack pro Contextum — pro server gawt.dtcloud.cz, NE pro lokální vývoj.
 # Lokálně dál stačí `./manage.py runserver` + `npm run dev` (viz hlavní README).
 #
 # Ansible (playbooks/deploy.yml) tenhle stack pošle na server a tam ho postaví + spustí:
@@ -15,8 +15,8 @@ services:
     build:
       context: ..                 # kořen repa (Dockerfile potřebuje prj/, requirements.txt, fixtures/)
       dockerfile: Dockerfile
-    image: filmdb-web:latest
-    container_name: filmdb-web
+    image: contextum-web:latest
+    container_name: contextum-web
     restart: unless-stopped
     env_file:
       - config/production.env      # necitlivé nastavení (DEBUG, ALLOWED_HOSTS, cesty k datům, …)
@@ -53,11 +53,11 @@ services:
       # hlavičku X-Forwarded-Proto=https, kterou nginx i Django respektují.
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
-      - "traefik.http.routers.filmdb.rule=Host(`${APP_HOST}`)"
-      - "traefik.http.routers.filmdb.entrypoints=${TRAEFIK_ENTRYPOINT}"
-      - "traefik.http.routers.filmdb.tls=true"
-      - "traefik.http.routers.filmdb.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
-      - "traefik.http.services.filmdb.loadbalancer.server.port=80"
+      - "traefik.http.routers.contextum.rule=Host(`${APP_HOST}`)"
+      - "traefik.http.routers.contextum.entrypoints=${TRAEFIK_ENTRYPOINT}"
+      - "traefik.http.routers.contextum.tls=true"
+      - "traefik.http.routers.contextum.tls.certresolver=${TRAEFIK_CERTRESOLVER}"
+      - "traefik.http.services.contextum.loadbalancer.server.port=80"
 
 networks:
   # Externí síť vytvořená traefikem na serveru — musí existovat předem

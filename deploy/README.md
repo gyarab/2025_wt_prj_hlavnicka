@@ -1,7 +1,7 @@
-# Nasazení FilmDB (deployment)
+# Nasazení Contextum (deployment)
 
 Tahle složka přidává **nasazení aplikace na reálný server** — aplikace běží na
-**https://vch.gawt.dtcloud.cz**. Navazuje na lekci o Dockeru: aplikaci zabalíme do
+**https://hlavnicka.gawt.dtcloud.cz**. Navazuje na lekci o Dockeru: aplikaci zabalíme do
 kontejnerů a pošleme ji na server přes **Ansible**, celé to spouští **GitHub Actions**
 a provoz zvenčí na ni pouští **traefik** (reverzní proxy na serveru).
 
@@ -13,7 +13,7 @@ a provoz zvenčí na ni pouští **traefik** (reverzní proxy na serveru).
 ```
                        ┌──────────────────── server gawt.dtcloud.cz ───────────────────────┐
                        │  traefik  (HTTPS / Let's Encrypt, síť `proxy`)                    │
- návštěvník ──HTTPS──► │     │  Host(vch.gawt.dtcloud.cz)                                  │
+ návštěvník ──HTTPS──► │     │  Host(hlavnicka.gawt.dtcloud.cz)                            │
                        │     ▼                                                             │
                        │  frontend (nginx)                                                 │
                        │    /app/     →  Vue SPA (build z frontend/)                       │
@@ -92,7 +92,7 @@ Co playbooky dělají:
 ## Spustit celý stack přímo na serveru (debug)
 
 ```bash
-cd /home/vasek/filmdb/deploy   # = project_dir z inventory.ini
+cd /home/hlavnicka/contextum/deploy   # = project_dir z inventory.ini
 docker compose --env-file config/production.env -f docker-compose.yml up -d --build
 docker compose --env-file config/production.env -f docker-compose.yml logs -f web
 ```
@@ -104,7 +104,7 @@ docker compose --env-file config/production.env -f docker-compose.yml logs -f we
 - Běžící **traefik** se sdílenou externí sítí **`proxy`** (entrypoint `websecure`,
   certresolver `letsencrypt` — názvy uprav v `production.env`, pokud má platforma jiné).
   Síť musí existovat předem: `docker network create proxy`.
-- **DNS** pro `vch.gawt.dtcloud.cz` míří na server (aby traefik dostal Let's Encrypt cert).
+- **DNS** pro `hlavnicka.gawt.dtcloud.cz` míří na server (aby traefik dostal Let's Encrypt cert).
 
 ## Jak nasazení probíhá (krok za krokem)
 
@@ -134,7 +134,7 @@ Od `git push` po běžící web — co dělá GitHub Actions a co docker compose
    - **`frontend`** (nginx) servíruje Vue SPA (`/app/`), statiku a média a zbytek
      proxuje na `web`.
 5. **traefik** si všimne štítků na kontejneru `frontend`, vystaví pro
-   `vch.gawt.dtcloud.cz` HTTPS certifikát (Let's Encrypt) a začne na nginx posílat
+   `hlavnicka.gawt.dtcloud.cz` HTTPS certifikát (Let's Encrypt) a začne na nginx posílat
    provoz. Web je živý.
 
 Celé je to **idempotentní**: další push znovu postaví image a přepne kontejnery na
